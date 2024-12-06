@@ -7,10 +7,10 @@ namespace ToDo.Shared.Extension
         public static string ConvertPascalToSnake(this string input)
         {
             if (string.IsNullOrEmpty(input)) return input;
-            
+
             var result = new StringBuilder();
             result.Append(char.ToLower(input[0]));
-            
+
             for (int i = 1; i < input.Length; i++)
             {
                 char c = input[i];
@@ -24,7 +24,7 @@ namespace ToDo.Shared.Extension
                     result.Append(c);
                 }
             }
-            
+
             return result.ToString();
         }
     }
