@@ -9,6 +9,6 @@
         public DateTime CreatedAt { get; init; }
         public DateTime UpdatedAt { get; init; }
         public long UserId { get; init; }
-        public User? User { get; init; };
+        public User? User { get; init; }
     }
 }
