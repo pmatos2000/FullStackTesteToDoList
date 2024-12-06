@@ -6,5 +6,7 @@
         public required string UserName { get; init; }
         public required string PasswordHash { get; init; }
         public required DateTime CreatedAt { get; init; }
+
+        public ICollection<TodoItem> Tasks { get; init; } = [];
     }
 }
