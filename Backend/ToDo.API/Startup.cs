@@ -76,11 +76,11 @@ namespace ToDo.API
 
             if (string.IsNullOrEmpty(secretKey))
             {
-                throw new InvalidOperationException(ErrorMessage.SECRET_KEY_NOT_APPSETTINGS);
+                throw new InvalidOperationException(Messages.ERRO_SECRET_KEY_NOT_APPSETTINGS);
             }
             if (secretKey.Length < 16)
             {
-                throw new InvalidOperationException(ErrorMessage.SECRET_KEY_SIZE);
+                throw new InvalidOperationException(Messages.ERRO_SECRET_KEY_SIZE);
             }
             var key = Encoding.ASCII.GetBytes(secretKey);
 

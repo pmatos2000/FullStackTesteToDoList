@@ -1,10 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+
 using ToDo.Repositories.Interfaces;
+using ToDo.Repositories.Model.Entity;
 
 namespace ToDo.Repositories.Repositories
 {
@@ -15,6 +12,18 @@ namespace ToDo.Repositories.Repositories
         public UserRepositorie(AppDbContext appDbContext)
         {
             this.appDbContext = appDbContext;
+        }
+
+        public async Task Register(string userName, string passwordHash)
+        {
+            var newUser = new User
+            {
+                UserName = userName,
+                PasswordHash = passwordHash,
+            };
+
+            await appDbContext.Users.AddAsync(newUser);
+            await appDbContext.SaveChangesAsync();
         }
 
         public Task<bool> VerifyUserName(string userName)

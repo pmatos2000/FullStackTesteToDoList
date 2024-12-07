@@ -9,5 +9,6 @@ namespace ToDo.Repositories.Interfaces
     public interface IUserRepositorie
     {
         public Task<bool> VerifyUserName(string userName);
+        public Task Register(string userName, string passwordHash);
     }
 }

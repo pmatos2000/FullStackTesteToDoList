@@ -29,6 +29,7 @@ namespace ToDo.Repositories.Map
 
             builder.Property(x => x.CreatedAt)
                 .HasColumnName(nameof(User.CreatedAt).ConvertPascalToSnake())
+                .HasDefaultValueSql("NOW()")
                 .ValueGeneratedOnAdd();
         }
     }
