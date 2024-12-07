@@ -2,8 +2,13 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
+using System.Reflection;
 using System.Text;
 using ToDo.Repositories;
+using ToDo.Repositories.Interfaces;
+using ToDo.Repositories.Repositories;
+using ToDo.Services.Interfaces;
+using ToDo.Services.Services;
 using ToDo.Shared.Constants;
 
 namespace ToDo.API
@@ -24,6 +29,7 @@ namespace ToDo.API
             ConfigureServicesDbContext(services);
             ConfigureServicesAuthentication(services);
             ConfigureServicesSwagger(services);
+            ConfigureServicesDependencyInjection(services);
 
             services.AddControllers();
         }
@@ -104,15 +110,19 @@ namespace ToDo.API
 
         private static void ConfigureServicesSwagger(IServiceCollection services)
         {
-            services.AddSwaggerGen(c =>
+            services.AddSwaggerGen(x =>
             {
-                c.SwaggerDoc("v1", new OpenApiInfo
+                x.SwaggerDoc("v1", new OpenApiInfo
                 {
                     Title = "To-Do",
                     Version = "v1",
                 });
 
-                c.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
+                var xmlFile = $"{Assembly.GetExecutingAssembly().GetName().Name}.xml";
+                var xmlPath = Path.Combine(AppContext.BaseDirectory, xmlFile);
+                x.IncludeXmlComments(xmlPath);
+
+                x.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
                 {
                     In = ParameterLocation.Header,
                     Description = "Por favor insira o token JWT neste formato: Bearer {token}",
@@ -120,7 +130,7 @@ namespace ToDo.API
                     Type = SecuritySchemeType.ApiKey
                 });
 
-                c.AddSecurityRequirement(new OpenApiSecurityRequirement
+                x.AddSecurityRequirement(new OpenApiSecurityRequirement
                 {
                     {
                         new OpenApiSecurityScheme
@@ -135,6 +145,13 @@ namespace ToDo.API
                     }
                 });
             });
+        }
+
+        private static void ConfigureServicesDependencyInjection(IServiceCollection services)
+        {
+            services.AddTransient<IUserService, UserService>();
+
+            services.AddTransient<IUserRepositorie, UserRepositorie>();
         }
     }
 }
