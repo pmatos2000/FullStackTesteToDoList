@@ -23,7 +23,7 @@ namespace ToDo.API.Controllers
         /// <response code="200">Retorna true se o nome de usuário existir; caso contrário, false.</response>
         [HttpGet("verify-username")]
         [ProducesResponseType(200)]
-        public async Task<IActionResult> VerifyUserName([FromQuery] string userName)
+        public async Task<ActionResult<bool>> VerifyUserName([FromQuery] string userName)
         {
             var result = await userService.VerifyUserName(userName);
             return Ok(result);
