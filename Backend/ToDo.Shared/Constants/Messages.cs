@@ -8,6 +8,13 @@
         public const string SUCCESS_NEW_USER = "Usuário registrado com sucesso.";
         public const string ERRO_USER_CONFLICT = "Usuário já existe.";
 
+        public const string ERRO_PASSWORD_REQUERED = "A senha é obrigatória.";
+        public const string ERRO_PASSWORD_SIZE_MIN = "A senha deve ter pelo menos {0} caracteres.";
+        public const string ERRO_PASSWORD_SIZE_MAX = "A senha deve ter no máximo {0} caracteres.";
+        public const string ERRO_PASSWORD_CHAR_LOWER = "A senha deve conter pelo menos uma letra minúscula.";
+        public const string ERRO_PASSWORD_CHAR_UPPER = "A senha deve conter pelo menos uma letra maiúscula.";
+        public const string ERRO_PASSWORD_NUMBER = "A senha deve conter pelo menos um número.";
+        public const string ERRO_PASSWORD_CHAR_SPECIAL = "A senha deve conter pelo menos um caractere especial.";
     }
 }
 

@@ -42,7 +42,7 @@ namespace ToDo.API.Controllers
         /// <response code="409">Usuário já existe.</response>
         /// <response code="500">Erro interno do servidor.</response>
         [HttpPost("register")]
-        public async Task<IActionResult> Register([FromBody] UserModel user)
+        public async Task<IActionResult> Register([FromBody] UserRegisterModel user)
         {
             var result = await userService.Register(user.UserName, user.Password);
             

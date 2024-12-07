@@ -35,11 +35,19 @@ namespace ToDo.API
             ConfigureServicesAuthentication(services);
             ConfigureServicesSwagger(services);
             ConfigureServicesDependencyInjection(services);
+            ConfigureServicesValidation(services);
 
-            services.AddTransient<IValidator<UserNameModel>, UserNameValidator>();
-            services.AddFluentValidationAutoValidation();
+
 
             services.AddControllers();
+        }
+
+        private static void ConfigureServicesValidation(IServiceCollection services)
+        {
+            services.AddTransient<IValidator<UserNameModel>, UserNameModelValidator>();
+            services.AddTransient<IValidator<UserRegisterModel>, UserRegisterModelValidator>();
+            
+            services.AddFluentValidationAutoValidation();
         }
 
         public static void Configure(WebApplication app)

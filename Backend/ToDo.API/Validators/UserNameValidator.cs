@@ -4,11 +4,11 @@ using ToDo.Shared.Constants;
 
 namespace ToDo.API.Validators
 {
-    public class UserNameValidator : AbstractValidator<UserNameModel>
+    public class UserNameValidator : AbstractValidator<string>
     {
         public UserNameValidator()
         {
-            RuleFor(x => x.UserName)
+            RuleFor(userName => userName)
                 .NotEmpty()
                 .NotNull()
                 .Length(Limits.MIN_SIZE_NAMEUSER, Limits.MAX_SIZE_NAMEUSER);
