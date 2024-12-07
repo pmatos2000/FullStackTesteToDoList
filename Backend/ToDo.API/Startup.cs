@@ -1,9 +1,14 @@
-﻿using Microsoft.AspNetCore.Authentication.JwtBearer;
+﻿using FluentValidation;
+using FluentValidation.AspNetCore;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
+using System;
 using System.Reflection;
 using System.Text;
+using ToDo.API.Models;
+using ToDo.API.Validators;
 using ToDo.Repositories;
 using ToDo.Repositories.Interfaces;
 using ToDo.Repositories.Repositories;
@@ -30,6 +35,9 @@ namespace ToDo.API
             ConfigureServicesAuthentication(services);
             ConfigureServicesSwagger(services);
             ConfigureServicesDependencyInjection(services);
+
+            services.AddTransient<IValidator<UserNameModel>, UserNameValidator>();
+            services.AddFluentValidationAutoValidation();
 
             services.AddControllers();
         }
