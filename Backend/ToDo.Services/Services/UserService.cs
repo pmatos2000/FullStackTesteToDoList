@@ -18,19 +18,19 @@ namespace ToDo.Services.Services
             this.userRepositorie = userRepositorie;
         }
 
-        public Task<bool> VerifyUserName(string userName)
+        public Task<bool> VerifyUserNameAsync(string userName)
         {
-            return userRepositorie.VerifyUserName(userName);
+            return userRepositorie.VerifyUserNameAsync(userName);
         }
 
-        public async Task<bool> Register(string userName, string password)
+        public async Task<bool> RegisterAsync(string userName, string password)
         {
-            var verifyUserName = await VerifyUserName(userName);
+            var verifyUserName = await VerifyUserNameAsync(userName);
             if (verifyUserName) return false;
 
             var passwordHash = Password.PasswordHash(password);
 
-            await userRepositorie.Register(userName, passwordHash);
+            await userRepositorie.RegisterAsync(userName, passwordHash);
 
             return true;
         }

@@ -14,7 +14,7 @@ namespace ToDo.Repositories.Repositories
             this.appDbContext = appDbContext;
         }
 
-        public async Task Register(string userName, string passwordHash)
+        public async Task RegisterAsync(string userName, string passwordHash)
         {
             var newUser = new User
             {
@@ -26,7 +26,7 @@ namespace ToDo.Repositories.Repositories
             await appDbContext.SaveChangesAsync();
         }
 
-        public Task<bool> VerifyUserName(string userName)
+        public Task<bool> VerifyUserNameAsync(string userName)
         {
             var normalizedUserName = userName.ToLower();
             return appDbContext.Users

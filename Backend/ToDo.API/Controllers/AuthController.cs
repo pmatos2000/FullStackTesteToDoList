@@ -26,9 +26,9 @@ namespace ToDo.API.Controllers
         /// <response code="500">Erro interno do servidor.</response>
         [HttpGet("verify-username")]
         [ProducesResponseType(typeof(bool), 200)]
-        public async Task<IActionResult> VerifyUserName([FromQuery] UserNameModel model)
+        public async Task<IActionResult> VerifyUserNameAsync([FromQuery] UserNameModel model)
         {
-            var result = await userService.VerifyUserName(model.UserName);
+            var result = await userService.VerifyUserNameAsync(model.UserName);
             return Ok(result);
         }
 
@@ -42,9 +42,9 @@ namespace ToDo.API.Controllers
         /// <response code="409">Usuário já existe.</response>
         /// <response code="500">Erro interno do servidor.</response>
         [HttpPost("register")]
-        public async Task<IActionResult> Register([FromBody] UserRegisterModel user)
+        public async Task<IActionResult> RegisterAsync([FromBody] UserRegisterModel user)
         {
-            var result = await userService.Register(user.UserName, user.Password);
+            var result = await userService.RegisterAsync(user.UserName, user.Password);
             
             if (result) return Ok(new { Message = Messages.SUCCESS_NEW_USER });
 

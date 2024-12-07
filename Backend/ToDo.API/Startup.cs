@@ -37,8 +37,6 @@ namespace ToDo.API
             ConfigureServicesDependencyInjection(services);
             ConfigureServicesValidation(services);
 
-
-
             services.AddControllers();
         }
 
