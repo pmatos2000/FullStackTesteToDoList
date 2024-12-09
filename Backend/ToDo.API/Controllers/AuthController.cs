@@ -96,17 +96,5 @@ namespace ToDo.API.Controllers
             });
         }
 
-        [HttpGet("userId")]
-        [ProducesResponseType(typeof(LoginResponseModel), 200)]
-        [ProducesResponseType(401)]
-        [ProducesResponseType(500)]
-        public IActionResult GetUserId()
-        {
-            var longId = GetUsetIdJwtToken();
-            if (longId == null) return Unauthorized("Não autorizado");
-            return Ok(longId);
-        }
-
-
     }
 }
