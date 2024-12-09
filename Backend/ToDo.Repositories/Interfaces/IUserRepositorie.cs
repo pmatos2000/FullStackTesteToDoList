@@ -1,4 +1,4 @@
-﻿using ToDo.Repositories.Model;
+﻿using ToDo.Repositories.Entitys.Models;
 
 namespace ToDo.Repositories.Interfaces
 {
