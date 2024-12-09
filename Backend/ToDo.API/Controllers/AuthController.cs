@@ -41,7 +41,7 @@ namespace ToDo.API.Controllers
         /// Cria um novo usuário.
         /// </summary>
         /// <param name="user">O usuário a ser criado.</param>
-        /// <returns>O usuário criado.</returns> 
+        /// <returns>Sucesso se o usuário foi criado</returns> 
         /// <response code="200">Retorna sucesso se o usiario foi criado.</response>
         /// <response code="400">Se a validação falhar.</response>
         /// <response code="409">Usuário já existe.</response>
@@ -76,6 +76,7 @@ namespace ToDo.API.Controllers
         /// <response code="500">Erro interno do servidor.</response>
         [HttpPost("login")]
         [ProducesResponseType(typeof(LoginResponseModel), 200)]
+        [ProducesResponseType(400)]
         [ProducesResponseType(401)]
         [ProducesResponseType(500)]
         public async Task<IActionResult> LoginAsync([FromBody] LoginUserModel loginModel)

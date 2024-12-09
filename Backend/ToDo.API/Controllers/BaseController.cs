@@ -36,7 +36,7 @@ namespace ToDo.API.Controllers
             var token = tokenHandler.CreateToken(tokenDescriptor); return tokenHandler.WriteToken(token);
         }
 
-        protected long? GetUsetIdJwtToken()
+        protected long? GetUsetIdFromJwtToken()
         {
             var claims = GetClaims();
             var userIdClaim = claims

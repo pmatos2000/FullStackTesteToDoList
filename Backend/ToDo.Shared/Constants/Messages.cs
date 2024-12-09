@@ -18,6 +18,11 @@
 
         public const string ERRO_USER_NOT_EXIT = "Usuário não encontrado.";
         public const string ERRO_PASSWORD_INVALID = "Senha inválida.";
+
+        public const string ERRO_INVALID_CREDENTIALS = "Credenciais inválidas.";
+
+        public const string SUCESS_NEW_CATEGORY = "Categoria criada";
+        public const string ERRO_CATEGORY_CONFLICT = "Categoria já existente";
     }
 }
 

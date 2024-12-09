@@ -149,6 +149,7 @@ namespace ToDo.API
         private static void ConfigureServicesDependencyInjection(IServiceCollection services)
         {
             services.AddTransient<IUserService, UserService>();
+            services.AddTransient<ICategoryService, CategoryService>();
 
             services.AddTransient<IUserRepositorie, UserRepositorie>();
         }
