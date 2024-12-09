@@ -6,6 +6,7 @@ using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 using System.Reflection;
 using System.Text;
+using ToDo.API.Extension;
 using ToDo.API.Models;
 using ToDo.API.Validators;
 using ToDo.Repositories;
@@ -76,23 +77,7 @@ namespace ToDo.API
             app.MapControllers();
         }
 
-        private SymmetricSecurityKey GetSymmetricKey()
-        {
-            var secretKey = Configuration["Secret:Key"];
-
-            if (string.IsNullOrEmpty(secretKey))
-            {
-                throw new InvalidOperationException(Messages.ERRO_SECRET_KEY_NOT_APPSETTINGS);
-            }
-            if (secretKey.Length < 16)
-            {
-                throw new InvalidOperationException(Messages.ERRO_SECRET_KEY_SIZE);
-            }
-            var key = Encoding.ASCII.GetBytes(secretKey);
-
-            return new SymmetricSecurityKey(key);
-        }
-
+ 
         private void ConfigureServicesDbContext(IServiceCollection services)
         {
             services.AddDbContext<AppDbContext>(
@@ -115,7 +100,7 @@ namespace ToDo.API
                 x.TokenValidationParameters = new TokenValidationParameters
                 {
                     ValidateIssuerSigningKey = true,
-                    IssuerSigningKey = GetSymmetricKey(),
+                    IssuerSigningKey = Configuration.GetSymmetricKey(),
                     ValidateIssuer = false,
                     ValidateAudience = false
                 };

@@ -1,4 +1,9 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.IdentityModel.Tokens;
+using System.IdentityModel.Tokens.Jwt;
+using System.Security.Claims;
+using System.Text;
 using ToDo.API.Models;
 using ToDo.Services.Interfaces;
 using ToDo.Shared.Constants;
@@ -7,11 +12,12 @@ namespace ToDo.API.Controllers
 {
     [ApiController]
     [Route("api/[controller]")]
-    public class AuthController : ControllerBase
+    [AllowAnonymous]
+    public class AuthController : BaseController
     {
         private readonly IUserService userService;
-
-        public AuthController(IUserService userService)
+        
+        public AuthController(IConfiguration configuration, IUserService userService) : base(configuration)
         {
             this.userService = userService;
         }
@@ -77,7 +83,11 @@ namespace ToDo.API.Controllers
 
             if (loginResult.Success)
             {
-                return Ok(loginResult);
+                return Ok(new LoginResponseModel
+                {
+                    UserName = loginResult.UserName,
+                    JwtToken = GenerateJwtToken(loginResult.UserId)
+                });
             }
 
             return BadRequest(new
@@ -85,5 +95,18 @@ namespace ToDo.API.Controllers
                 Message = loginResult.ErrorMessage,
             });
         }
+
+        [HttpGet("userId")]
+        [ProducesResponseType(typeof(LoginResponseModel), 200)]
+        [ProducesResponseType(401)]
+        [ProducesResponseType(500)]
+        public IActionResult GetUserId()
+        {
+            var longId = GetUsetIdJwtToken();
+            if (longId == null) return Unauthorized("Não autorizado");
+            return Ok(longId);
+        }
+
+
     }
 }
