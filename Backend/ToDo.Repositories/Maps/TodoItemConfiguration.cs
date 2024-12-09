@@ -43,6 +43,9 @@ namespace ToDo.Repositories.Map
             builder.Property(x => x.UserId)
                 .HasColumnName(nameof(TodoItem.UserId).ConvertPascalToSnake())
                 .IsRequired();
+
+            builder.Property(x => x.CategoryId)
+                .HasColumnName(nameof(TodoItem.CategoryId).ConvertPascalToSnake());
         }
     }
 }

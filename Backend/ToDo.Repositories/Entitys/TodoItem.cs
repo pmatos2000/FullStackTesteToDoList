@@ -1,4 +1,6 @@
-﻿namespace ToDo.Repositories.Model
+﻿using ToDo.Repositories.Entitys;
+
+namespace ToDo.Repositories.Model
 {
     public record TodoItem
     {
@@ -10,5 +12,7 @@
         public DateTime UpdatedAt { get; init; }
         public long UserId { get; init; }
         public User? User { get; init; }
+        public long? CategoryId { get; init; }
+        public Category? Category { get; init; }
     }
 }

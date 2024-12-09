@@ -1,4 +1,6 @@
-﻿namespace ToDo.Repositories.Model
+﻿using ToDo.Repositories.Entitys;
+
+namespace ToDo.Repositories.Model
 {
     public record User
     {
@@ -6,6 +8,7 @@
         public required string UserName { get; init; }
         public required string PasswordHash { get; init; }
         public DateTime CreatedAt { get; init; }
-        public ICollection<TodoItem> Tasks { get; init; } = [];
+        public ICollection<TodoItem>? Tasks { get; init; }
+        public ICollection<Category>? Categories { get; init; }
     }
 }
