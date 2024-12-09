@@ -39,7 +39,7 @@ namespace ToDo.Services.Services
 
         public async Task<LoginUserDto> LoginAsync(string userName, string password)
         {
-            var loginUser = await userRepositorie.GetUserByNameAsync(userName);
+            var loginUser = await userRepositorie.GetUserLoginByNameAsync(userName);
 
             if(loginUser == null)
             {

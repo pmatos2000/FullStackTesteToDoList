@@ -14,9 +14,17 @@ namespace ToDo.Repositories.Repositories
             this.appDbContext = appDbContext;
         }
 
-        public Task<UserLogin> GetUserByNameAsync(string userName)
+        public Task<UserLogin?> GetUserLoginByNameAsync(string userName)
         {
-            throw new NotImplementedException();
+            return appDbContext.Users
+                .Where(x => x.UserName == userName)
+                .Select(x => new UserLogin
+                {
+                    Id = x.Id,
+                    UserName = x.UserName,
+                    PasswordHash = x.PasswordHash,
+                })
+                .FirstOrDefaultAsync();
         }
 
         public async Task RegisterAsync(string userName, string passwordHash)

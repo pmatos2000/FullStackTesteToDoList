@@ -11,6 +11,6 @@ namespace ToDo.Repositories.Interfaces
     {
         public Task<bool> VerifyUserNameAsync(string userName);
         public Task RegisterAsync(string userName, string passwordHash);
-        public Task<UserLogin> GetUserByNameAsync(string userName);
+        public Task<UserLogin?> GetUserLoginByNameAsync(string userName);
     }
 }

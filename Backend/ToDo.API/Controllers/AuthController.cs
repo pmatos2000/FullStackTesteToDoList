@@ -46,9 +46,18 @@ namespace ToDo.API.Controllers
         {
             var result = await userService.RegisterAsync(user.UserName, user.Password);
 
-            if (result) return Ok(new { Message = Messages.SUCCESS_NEW_USER });
+            if (result)
+            {
+                return Ok(new
+                {
+                    Message = Messages.SUCCESS_NEW_USER
+                });
+            }
 
-            return Conflict(new { Message = Messages.ERRO_USER_CONFLICT });
+            return Conflict( new
+            {
+                Message = Messages.ERRO_USER_CONFLICT
+            });
         }
 
         /// <summary>
@@ -69,15 +78,13 @@ namespace ToDo.API.Controllers
 
             if (loginResult.Success)
             {
-                return BadRequest(new
-                {
-                    Message = loginResult.ErrorMessage,
-
-                });
+                return Ok(loginResult);
             }
 
-            return Ok(loginResult);
-
+            return BadRequest(new
+            {
+                Message = loginResult.ErrorMessage,
+            });
         }
     }
 }
