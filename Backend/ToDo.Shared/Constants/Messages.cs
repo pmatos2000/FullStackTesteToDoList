@@ -15,6 +15,9 @@
         public const string ERRO_PASSWORD_CHAR_UPPER = "A senha deve conter pelo menos uma letra maiúscula.";
         public const string ERRO_PASSWORD_NUMBER = "A senha deve conter pelo menos um número.";
         public const string ERRO_PASSWORD_CHAR_SPECIAL = "A senha deve conter pelo menos um caractere especial.";
+
+        public const string ERRO_USER_NOT_EXIT = "Usuário não encontrado.";
+        public const string ERRO_PASSWORD_INVALID = "Senha inválida.";
     }
 }
 

@@ -45,10 +45,39 @@ namespace ToDo.API.Controllers
         public async Task<IActionResult> RegisterAsync([FromBody] UserRegisterModel user)
         {
             var result = await userService.RegisterAsync(user.UserName, user.Password);
-            
+
             if (result) return Ok(new { Message = Messages.SUCCESS_NEW_USER });
 
             return Conflict(new { Message = Messages.ERRO_USER_CONFLICT });
+        }
+
+        /// <summary>
+        /// Realiza o login de um usuário.
+        /// </summary>
+        /// <param name="loginModel">Modelo contendo o nome de usuário e a senha.</param>
+        /// <returns>JWT e o nome de usuário.</returns>
+        /// <response code="200">Retorna o JWT e o nome de usuário se a autenticação for bem-sucedida.</response>
+        /// <response code="400">Erros de validação ou credenciais incorretas.</response>
+        /// <response code="500">Erro interno do servidor.</response>
+        [HttpPost("login")]
+        [ProducesResponseType(typeof(LoginResponseModel), 200)]
+        [ProducesResponseType(400)]
+        [ProducesResponseType(500)]
+        public async Task<IActionResult> LoginAsync([FromBody] LoginUserModel loginModel)
+        {
+            var loginResult = await userService.LoginAsync(loginModel.UserName, loginModel.Password);
+
+            if (loginResult.Success)
+            {
+                return BadRequest(new
+                {
+                    Message = loginResult.ErrorMessage,
+
+                });
+            }
+
+            return Ok(loginResult);
+
         }
     }
 }
