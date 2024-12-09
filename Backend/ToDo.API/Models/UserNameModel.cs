@@ -1,6 +1,6 @@
 ﻿namespace ToDo.API.Models
 {
-    public record UserNameModel 
+    public record UserNameModel
     {
         /// <summary>
         /// O nome de usuário a ser verificado.

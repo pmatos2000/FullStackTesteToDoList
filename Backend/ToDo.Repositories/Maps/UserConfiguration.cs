@@ -1,6 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
-using ToDo.Repositories.Model.Entity;
+using ToDo.Repositories.Model;
 using ToDo.Shared.Extension;
 
 namespace ToDo.Repositories.Map

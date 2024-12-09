@@ -1,5 +1,4 @@
 ﻿using FluentValidation;
-using ToDo.API.Models;
 using ToDo.Shared.Constants;
 
 namespace ToDo.API.Validators

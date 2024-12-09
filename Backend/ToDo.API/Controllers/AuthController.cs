@@ -1,6 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using ToDo.API.Models;
-using ToDo.Repositories.Model.Entity;
 using ToDo.Services.Interfaces;
 using ToDo.Shared.Constants;
 
@@ -54,7 +53,7 @@ namespace ToDo.API.Controllers
                 });
             }
 
-            return Conflict( new
+            return Conflict(new
             {
                 Message = Messages.ERRO_USER_CONFLICT
             });

@@ -4,7 +4,6 @@ using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
-using System;
 using System.Reflection;
 using System.Text;
 using ToDo.API.Models;
@@ -44,7 +43,7 @@ namespace ToDo.API
         {
             services.AddTransient<IValidator<UserNameModel>, UserNameModelValidator>();
             services.AddTransient<IValidator<UserRegisterModel>, UserRegisterModelValidator>();
-            
+
             services.AddFluentValidationAutoValidation();
         }
 

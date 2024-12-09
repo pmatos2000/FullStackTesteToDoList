@@ -1,4 +1,4 @@
-﻿namespace ToDo.Repositories.Model.Entity
+﻿namespace ToDo.Repositories.Model
 {
     public record User
     {

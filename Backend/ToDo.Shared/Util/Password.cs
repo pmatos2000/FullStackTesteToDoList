@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace ToDo.Shared.Util
+﻿namespace ToDo.Shared.Util
 {
     public static class Password
     {

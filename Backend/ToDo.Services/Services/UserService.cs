@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using ToDo.Repositories.Interfaces;
+﻿using ToDo.Repositories.Interfaces;
 using ToDo.Services.Dto;
 using ToDo.Services.Interfaces;
 using ToDo.Shared.Constants;
@@ -41,7 +36,7 @@ namespace ToDo.Services.Services
         {
             var loginUser = await userRepositorie.GetUserLoginByNameAsync(userName);
 
-            if(loginUser == null)
+            if (loginUser == null)
             {
                 return new LoginUserDto
                 {

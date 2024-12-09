@@ -1,7 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 
 using ToDo.Repositories.Interfaces;
-using ToDo.Repositories.Model.Entity;
+using ToDo.Repositories.Model;
 
 namespace ToDo.Repositories.Repositories
 {
