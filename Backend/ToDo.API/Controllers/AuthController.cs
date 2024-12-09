@@ -71,11 +71,12 @@ namespace ToDo.API.Controllers
         /// <param name="loginModel">Modelo contendo o nome de usuário e a senha.</param>
         /// <returns>JWT e o nome de usuário.</returns>
         /// <response code="200">Retorna o JWT e o nome de usuário se a autenticação for bem-sucedida.</response>
-        /// <response code="400">Erros de validação ou credenciais incorretas.</response>
+        /// <response code="400">Se a validação falhar.</response>
+        /// <response code="401">Erros de validação ou credenciais incorretas.</response>
         /// <response code="500">Erro interno do servidor.</response>
         [HttpPost("login")]
         [ProducesResponseType(typeof(LoginResponseModel), 200)]
-        [ProducesResponseType(400)]
+        [ProducesResponseType(401)]
         [ProducesResponseType(500)]
         public async Task<IActionResult> LoginAsync([FromBody] LoginUserModel loginModel)
         {
@@ -90,7 +91,7 @@ namespace ToDo.API.Controllers
                 });
             }
 
-            return BadRequest(new
+            return Unauthorized(new
             {
                 Message = loginResult.ErrorMessage,
             });
