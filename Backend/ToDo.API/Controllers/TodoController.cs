@@ -22,7 +22,7 @@ namespace ToDo.API.Controllers
         /// Cria uma nova tarefa para o usuário logado.
         /// </summary>
         /// <param name="model">Modelo contendo os dados da tarefa a ser criada.</param>
-        /// <returns>Retorna um status indicando o resultado da operação.</returns>
+        /// <returns>Retorna id da tarefa criada</returns>
         /// <response code="201">Retorna o id da tarefa criada.</response>
         /// <response code="400">Retorna se a validação dos dados falhar.</response>
         /// <response code="401">Retorna se as credenciais estiverem incorretas ou o usuário não estiver autenticado.</response>
