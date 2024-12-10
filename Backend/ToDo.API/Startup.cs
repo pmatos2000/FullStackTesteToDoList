@@ -151,9 +151,11 @@ namespace ToDo.API
         {
             services.AddTransient<IUserService, UserService>();
             services.AddTransient<ICategoryService, CategoryService>();
+            services.AddTransient<ITodoService, TodoService>();
 
             services.AddTransient<IUserRepositorie, UserRepositorie>();
             services.AddTransient<ICategoryRepositorie, CategoryRepositorie>();
+            services.AddTransient<ITodoRepositorie, TodoRepositorie>();
         }
     }
 }
