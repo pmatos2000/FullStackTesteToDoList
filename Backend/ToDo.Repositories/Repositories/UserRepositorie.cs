@@ -16,8 +16,10 @@ namespace ToDo.Repositories.Repositories
 
         public Task<UserLogin?> GetUserLoginByNameAsync(string userName)
         {
+            var normalizedUserName = userName.ToLower();
+
             return appDbContext.Users
-                .Where(x => x.UserName == userName)
+                .Where(x => x.UserName.ToLower() == normalizedUserName)
                 .Select(x => new UserLogin
                 {
                     Id = x.Id,
