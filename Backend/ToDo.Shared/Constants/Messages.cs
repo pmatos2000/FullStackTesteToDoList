@@ -23,6 +23,8 @@
 
         public const string SUCESS_NEW_CATEGORY = "Categoria criada";
         public const string ERRO_CATEGORY_CONFLICT = "Categoria já existente";
+
+        public const string ERRO_OPTIONAL_ID = "O valor deve ser null ou maior que zero.";
     }
 }
 
