@@ -135,6 +135,31 @@ namespace ToDo.API.Controllers
             return Ok(todoModel);
         }
 
+
+        /// <summary>
+        /// Recupera uma lista de tarefas para o usuário logado, com a opção de filtrá-las por categoria.
+        /// </summary>
+        /// <param name="categoryId">O ID opcional da categoria para filtrar as tarefas. Se não for fornecido, retorna todas as tarefas.</param>
+        /// <returns>Retorna a lista de tarefas filtrada pela categoria, se fornecida.</returns>
+        /// <response code="200">A lista de tarefas foi recuperada com sucesso.</response>
+        /// <response code="401">As credenciais estão incorretas ou o usuário não está autenticado.</response>
+        /// <response code="500">Ocorreu um erro interno no servidor.</response>
+        [HttpGet("list")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status401Unauthorized)]
+        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
+        public async Task<IActionResult> GetListTodoAsync(long? categoryId)
+        {
+            var userId = GetUsetIdFromJwtToken();
+            if (userId == null)
+                return Unauthorized(new MessageResponseModel(Messages.ERRO_INVALID_CREDENTIALS));
+
+            var todoList = await todoService.GetListTodoAsync(userId.Value, categoryId);
+            var todoListModel = todoList.Select(x => ConvertTodoItemDtoToModel(x));
+            return Ok(todoListModel);
+        }
+
+
         private static TodoCreateDto ConvertTodoCreateModelToDto(TodoCreateModel todoCreateDto, long userId)
         {
             return new TodoCreateDto

@@ -63,5 +63,11 @@ namespace ToDo.Services.Services
                 UpdatedAt = item.UpdatedAt
             };
         }
+
+        public async Task<IEnumerable<TodoItemDto>> GetListTodoAsync(long userId, long? categoryId)
+        {
+            var listTodo = await todoRepositorie.GetListTodoAsync(userId, categoryId);
+            return listTodo.Select(x => ConvertTodoItemEntityToDto(x));
+        }
     }
 }

@@ -19,6 +19,20 @@ namespace ToDo.Repositories.Repositories
             return newTodoItem.Entity.Id;
         }
 
+        public async Task<IEnumerable<TodoItem>> GetListTodoAsync(long userId, long? categoryId)
+        {
+            var query = appDbContext.TodoItems.Where(x => x.UserId == userId);
+
+            if(categoryId.HasValue)
+            {
+                query = query.Where(query => query.CategoryId == categoryId.Value);
+            }
+
+            var list = await query.ToListAsync();
+
+            return list;
+        }
+
         public Task<TodoItem?> GetTodoAsync(long userId, long id)
         {
             return appDbContext.TodoItems
