@@ -1,9 +1,5 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.IdentityModel.Tokens;
-using System.IdentityModel.Tokens.Jwt;
-using System.Security.Claims;
-using System.Text;
 using ToDo.API.Models;
 using ToDo.Services.Interfaces;
 using ToDo.Shared.Constants;
@@ -16,7 +12,7 @@ namespace ToDo.API.Controllers
     public class AuthController : BaseController
     {
         private readonly IUserService userService;
-        
+
         public AuthController(IConfiguration configuration, IUserService userService) : base(configuration)
         {
             this.userService = userService;

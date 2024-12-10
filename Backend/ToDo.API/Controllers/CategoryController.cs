@@ -9,7 +9,7 @@ namespace ToDo.API.Controllers
     [ApiController]
     [Route("api/[controller]")]
     public class CategoryController : BaseController
-    { 
+    {
         private readonly ICategoryService categoryService;
 
         public CategoryController(IConfiguration configuration, ICategoryService categoryService) : base(configuration)

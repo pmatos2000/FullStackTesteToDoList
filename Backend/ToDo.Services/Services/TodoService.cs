@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using ToDo.Repositories.Interfaces;
+﻿using ToDo.Repositories.Interfaces;
 using ToDo.Repositories.Model;
 using ToDo.Services.Dto;
 using ToDo.Services.Interfaces;

@@ -5,7 +5,6 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 using System.Reflection;
-using System.Text;
 using ToDo.API.Extension;
 using ToDo.API.Models;
 using ToDo.API.Validators;
@@ -14,7 +13,6 @@ using ToDo.Repositories.Interfaces;
 using ToDo.Repositories.Repositories;
 using ToDo.Services.Interfaces;
 using ToDo.Services.Services;
-using ToDo.Shared.Constants;
 
 namespace ToDo.API
 {
@@ -78,7 +76,7 @@ namespace ToDo.API
             app.MapControllers();
         }
 
- 
+
         private void ConfigureServicesDbContext(IServiceCollection services)
         {
             services.AddDbContext<AppDbContext>(
