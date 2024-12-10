@@ -6,5 +6,7 @@ namespace ToDo.Services.Interfaces
     {
         public Task<long> CreateAsync(TodoCreateDto todoCreateDto);
         public Task<long?> TodoUpdateAsync(long todoId, TodoCreateDto todoCreateDto);
+        public Task<long?> TodoUpdateCompletionStatusAsync(long todoId, bool isCompleted);
+
     }
 }
