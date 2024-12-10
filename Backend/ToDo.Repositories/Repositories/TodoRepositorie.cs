@@ -22,7 +22,7 @@ namespace ToDo.Repositories.Repositories
         public async Task<long?> TodoUpdateAsync(long todoId, TodoItem todoItem)
         {
             var todo = await appDbContext.TodoItems
-                .FirstOrDefaultAsync(t => t.Id == todoId);
+                .FirstOrDefaultAsync(t => t.Id == todoId && t.UserId == todoItem.UserId);
             
             if (todo == null) return null;
 
