@@ -29,7 +29,7 @@ namespace ToDo.API.Controllers
         /// <response code="409">Retorna se a categoria já existe para este usuário.</response>
         /// <response code="500">Retorna se ocorrer um erro interno do servidor.</response>
         [HttpPost("create")]
-        [ProducesResponseType(typeof(MessageResponseModel), 200)]
+        [ProducesResponseType(typeof(CategoryModel), 200)]
         [ProducesResponseType(typeof(ValidationProblemDetails), 400)]
         [ProducesResponseType(typeof(MessageResponseModel), 401)]
         [ProducesResponseType(typeof(MessageResponseModel), 409)]
@@ -42,11 +42,15 @@ namespace ToDo.API.Controllers
             }
 
             var result = await categoryService.CreateAsync(userId.Value, model.CategoryName);
-            if (result)
+            if (result == null)
             {
-                return Ok(new MessageResponseModel(Messages.SUCESS_NEW_CATEGORY));
+                return Conflict(new MessageResponseModel(Messages.ERRO_CATEGORY_CONFLICT));
             }
-            return Conflict( new MessageResponseModel(Messages.ERRO_CATEGORY_CONFLICT));
+            return Ok(new CategoryModel
+            {
+                Id = result.Id,
+                Name = result.Name,
+            });
         }
 
     }
