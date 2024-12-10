@@ -7,7 +7,7 @@ namespace ToDo.Services.Services
 {
     public class TodoService : ITodoService
     {
-        private ITodoRepositorie todoRepositorie;
+        private readonly ITodoRepositorie todoRepositorie;
 
         public TodoService(ITodoRepositorie todoRepositorie)
         {
@@ -16,14 +16,26 @@ namespace ToDo.Services.Services
 
         public Task<long> CreateAsync(TodoCreateDto todoCreateDto)
         {
-            return todoRepositorie.CreateAsync(new TodoItem
+            var todoItem = ConvertTodoCreateDtoToEntity(todoCreateDto);
+            return todoRepositorie.CreateAsync(todoItem);
+        }
+
+        public Task<long?> TodoUpdateAsync(long todoId, TodoCreateDto todoCreateDto)
+        {
+            var todoItem = ConvertTodoCreateDtoToEntity(todoCreateDto);
+            return todoRepositorie.TodoUpdateAsync(todoId, todoItem);
+        }
+
+        private TodoItem ConvertTodoCreateDtoToEntity(TodoCreateDto todoCreateDto)
+        {
+            return new TodoItem
             {
                 Title = todoCreateDto.Title,
                 Description = todoCreateDto.Description,
                 IsCompleted = todoCreateDto.IsCompleted,
                 UserId = todoCreateDto.UserId,
                 CategoryId = todoCreateDto.CategoryId,
-            });
+            };
         }
     }
 }

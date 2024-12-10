@@ -25,6 +25,8 @@
         public const string ERRO_CATEGORY_CONFLICT = "Categoria já existente";
 
         public const string ERRO_OPTIONAL_ID = "O valor deve ser null ou maior que zero.";
+
+        public const string ERRO_UPDATE_ID_NOT_FOUND = "O id {0} da tarefa não foi encontrado.";
     }
 }
 

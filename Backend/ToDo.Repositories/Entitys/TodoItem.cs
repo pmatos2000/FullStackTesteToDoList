@@ -2,17 +2,17 @@
 
 namespace ToDo.Repositories.Model
 {
-    public record TodoItem
+    public class TodoItem
     {
-        public long Id { get; init; }
-        public required string Title { get; init; }
-        public required string Description { get; init; }
-        public bool IsCompleted { get; init; }
-        public DateTime CreatedAt { get; init; }
-        public DateTime UpdatedAt { get; init; }
-        public long UserId { get; init; }
-        public User? User { get; init; }
-        public long? CategoryId { get; init; }
-        public Category? Category { get; init; }
+        public long Id { get; set; }
+        public required string Title { get; set; }
+        public required string Description { get; set; }
+        public bool IsCompleted { get; set; }
+        public DateTime CreatedAt { get; set; }
+        public DateTime UpdatedAt { get; set; }
+        public long UserId { get; set; }
+        public User? User { get; set; }
+        public long? CategoryId { get; set; }
+        public Category? Category { get; set; }
     }
 }
