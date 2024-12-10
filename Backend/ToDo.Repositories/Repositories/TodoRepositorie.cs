@@ -19,6 +19,20 @@ namespace ToDo.Repositories.Repositories
             return newTodoItem.Entity.Id;
         }
 
+        public async Task<long?> DeleteTodoAsync(long userId, long id)
+        {
+            var todo = await appDbContext.TodoItems
+                .FirstOrDefaultAsync(t => t.Id == id && t.UserId == userId);
+
+            if (todo == null) return null;
+
+            appDbContext.TodoItems.Remove(todo);
+
+            await appDbContext.SaveChangesAsync();
+
+            return todo.Id;
+        }
+
         public async Task<IEnumerable<TodoItem>> GetListTodoAsync(long userId, long? categoryId)
         {
             var query = appDbContext.TodoItems.Where(x => x.UserId == userId);

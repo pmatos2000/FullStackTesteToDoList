@@ -31,9 +31,10 @@ namespace ToDo.API.Controllers
         /// <response code="401">Retorna se as credenciais estiverem incorretas ou o usuário não estiver autenticado.</response>
         /// <response code="500">Retorna se ocorrer um erro interno do servidor.</response>
         [HttpPost("create")]
-        [ProducesResponseType(typeof(IdResponseModel), 200)]
-        [ProducesResponseType(typeof(ValidationProblemDetails), 400)]
-        [ProducesResponseType(typeof(MessageResponseModel), 401)]
+        [ProducesResponseType(typeof(IdResponseModel), StatusCodes.Status200OK)]
+        [ProducesResponseType(typeof(ValidationProblemDetails), StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(typeof(MessageResponseModel), StatusCodes.Status401Unauthorized)]
+        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
         public async Task<IActionResult> CreateTodoAsync([FromBody] TodoCreateModel model)
         {
             var userId = GetUsetIdFromJwtToken();
@@ -60,6 +61,11 @@ namespace ToDo.API.Controllers
         /// <response code="401">Retorna se as credenciais estiverem incorretas ou o usuário não estiver autenticado.</response>
         /// <response code="404">Retorna se a tarefa não for encontrada.</response>
         /// <response code="500">Retorna se ocorrer um erro interno do servidor.</response>
+        [ProducesResponseType(typeof(MessageResponseModel), StatusCodes.Status200OK)]
+        [ProducesResponseType(typeof(ValidationProblemDetails), StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(typeof(MessageResponseModel), StatusCodes.Status401Unauthorized)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
         [HttpPut("update")]
         public async Task<IActionResult> UpdateTodoAsync([FromBody] TodoUpdateModel model)
         {
@@ -89,6 +95,10 @@ namespace ToDo.API.Controllers
         /// <response code="404">Retorna se a tarefa não for encontrada.</response>
         /// <response code="500">Retorna se ocorrer um erro interno do servidor.</response>
         [HttpPatch("update-completed")]
+        [ProducesResponseType(typeof(MessageResponseModel), StatusCodes.Status200OK)]
+        [ProducesResponseType(typeof(MessageResponseModel), StatusCodes.Status401Unauthorized)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
         public async Task<IActionResult> TodoUpdateCompletionStatusAsync(long id, bool isCompleted)
         {
             var userId = GetUsetIdFromJwtToken();
@@ -115,7 +125,7 @@ namespace ToDo.API.Controllers
         /// <response code="404">A tarefa não foi encontrada.</response>
         /// <response code="500">Ocorreu um erro interno no servidor.</response>
         [HttpGet("{id}")]
-        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(typeof(TodoItemModel), StatusCodes.Status200OK)]
         [ProducesResponseType(typeof(MessageResponseModel), StatusCodes.Status401Unauthorized)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
@@ -145,8 +155,8 @@ namespace ToDo.API.Controllers
         /// <response code="401">As credenciais estão incorretas ou o usuário não está autenticado.</response>
         /// <response code="500">Ocorreu um erro interno no servidor.</response>
         [HttpGet("list")]
-        [ProducesResponseType(StatusCodes.Status200OK)]
-        [ProducesResponseType(StatusCodes.Status401Unauthorized)]
+        [ProducesResponseType(typeof(IEnumerable<TodoItemModel>), StatusCodes.Status200OK)]
+        [ProducesResponseType(typeof(MessageResponseModel), StatusCodes.Status401Unauthorized)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
         public async Task<IActionResult> GetListTodoAsync(long? categoryId)
         {
@@ -159,6 +169,33 @@ namespace ToDo.API.Controllers
             return Ok(todoListModel);
         }
 
+
+        /// <summary>
+        /// Exclui uma tarefa existente para o usuário logado pelo ID fornecido.
+        /// </summary>
+        /// <param name="id">O ID da tarefa a ser excluída.</param>
+        /// <returns>Retorna um status indicando o resultado da operação.</returns>
+        /// <response code="200">A tarefa foi excluída com sucesso.</response>
+        /// <response code="401">As credenciais estão incorretas ou o usuário não está autenticado.</response>
+        /// <response code="404">A tarefa não foi encontrada.</response>
+        /// <response code="500">Ocorreu um erro interno no servidor.</response>
+        [HttpDelete("{id}")]
+        [ProducesResponseType(typeof(MessageResponseModel), StatusCodes.Status200OK)]
+        [ProducesResponseType(typeof(MessageResponseModel), StatusCodes.Status401Unauthorized)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
+        public async Task<IActionResult> DeleteTodoAsync(long id)
+        {
+            var userId = GetUsetIdFromJwtToken();
+            if (userId == null)
+                return Unauthorized(new MessageResponseModel(Messages.ERRO_INVALID_CREDENTIALS));
+
+            var result = await todoService.DeleteTodoAsync(userId.Value, id);
+
+            if(result == null) return NotFound();
+
+            return Ok(new MessageResponseModel(Messages.SUCESS_TODO_DELETE));
+        }
 
         private static TodoCreateDto ConvertTodoCreateModelToDto(TodoCreateModel todoCreateDto, long userId)
         {

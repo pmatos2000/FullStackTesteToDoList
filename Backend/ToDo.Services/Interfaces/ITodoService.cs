@@ -9,5 +9,6 @@ namespace ToDo.Services.Interfaces
         public Task<long?> TodoUpdateCompletionStatusAsync(long userId, long todoId, bool isCompleted);
         public Task<TodoItemDto?> GetTodoAsync(long userId, long id);
         public Task<IEnumerable<TodoItemDto>> GetListTodoAsync(long userId, long? categoryId);
+        public Task<long?> DeleteTodoAsync(long userId, long id);
     }
 }

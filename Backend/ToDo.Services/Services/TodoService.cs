@@ -69,5 +69,10 @@ namespace ToDo.Services.Services
             var listTodo = await todoRepositorie.GetListTodoAsync(userId, categoryId);
             return listTodo.Select(x => ConvertTodoItemEntityToDto(x));
         }
+
+        public Task<long?> DeleteTodoAsync(long userId, long id)
+        {
+            return todoRepositorie.DeleteTodoAsync(userId, id);
+        }
     }
 }
