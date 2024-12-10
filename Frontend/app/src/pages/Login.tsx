@@ -8,7 +8,7 @@ import {
   TextField,
   Typography,
 } from "@mui/material";
-import { FC, FormEvent } from "react";
+import { FC, FormEvent, useState } from "react";
 
 import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 
@@ -33,10 +33,14 @@ const LoginSubmit = styled(Button)({
 });
 
 const Login: FC = () => {
+  const [nameUser, setNameUser] = useState<string>("");
+  const [password, setPassword] = useState<string>("");
+
   const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     console.log(event.currentTarget.elements);
   };
+
   return (
     <LoginCard>
       <CardContent>
@@ -57,6 +61,8 @@ const Login: FC = () => {
             id="userName"
             label="Nome usuário"
             name="userName"
+            value={nameUser}
+            onChange={(e) => setNameUser(e.target.value.trim())}
             autoFocus
           />
           <TextField
@@ -65,10 +71,12 @@ const Login: FC = () => {
             required
             fullWidth
             name="password"
-            label="Password"
+            label="Senha"
             type="password"
             id="password"
             autoComplete="current-password"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
           />
           <LoginSubmit
             type="submit"
@@ -76,6 +84,7 @@ const Login: FC = () => {
             variant="contained"
             color="primary"
             className="login-submit"
+            disabled={nameUser.length < 3 || password.length < 8}
           >
             Entrar
           </LoginSubmit>
