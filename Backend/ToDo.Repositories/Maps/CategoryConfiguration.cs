@@ -34,7 +34,7 @@ namespace ToDo.Repositories.Maps
             builder.Property(x => x.UpdatedAt)
                 .HasColumnName(nameof(Category.UpdatedAt).ConvertPascalToSnake())
                 .HasDefaultValueSql("NOW()")
-                .ValueGeneratedOnAddOrUpdate();
+                .ValueGeneratedOnAdd();
         }
     }
 }

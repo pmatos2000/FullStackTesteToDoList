@@ -29,7 +29,7 @@ namespace ToDo.Repositories.Repositories
             todo.Description = todoItem.Description;
             todo.CategoryId = todoItem.CategoryId;
             todo.IsCompleted = todoItem.IsCompleted;
-            todo.UpdatedAt = DateTime.Now;
+            todo.UpdatedAt = DateTime.UtcNow;
 
             await appDbContext.SaveChangesAsync();
             
