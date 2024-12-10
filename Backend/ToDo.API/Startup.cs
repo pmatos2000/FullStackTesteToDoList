@@ -45,6 +45,7 @@ namespace ToDo.API
             services.AddTransient<IValidator<UserNameModel>, UserNameModelValidator>();
             services.AddTransient<IValidator<UserRegisterModel>, UserRegisterModelValidator>();
             services.AddTransient<IValidator<LoginUserModel>, LoginUserModelValidator>();
+            services.AddTransient<IValidator<CreateCategoryModel>, CreateCategoryModelValidator>();
 
             services.AddFluentValidationAutoValidation();
         }
