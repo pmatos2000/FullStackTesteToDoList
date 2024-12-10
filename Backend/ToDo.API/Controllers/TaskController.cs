@@ -97,7 +97,7 @@ namespace ToDo.API.Controllers
                 return Unauthorized(new MessageResponseModel(Messages.ERRO_INVALID_CREDENTIALS));
             }
 
-            var todoId = await todoService.TodoUpdateCompletionStatusAsync(id, isCompleted);
+            var todoId = await todoService.TodoUpdateCompletionStatusAsync(userId.Value, id, isCompleted);
 
             if (todoId == null) return NotFound();
 

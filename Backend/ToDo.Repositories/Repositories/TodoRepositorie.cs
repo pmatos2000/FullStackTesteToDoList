@@ -21,7 +21,8 @@ namespace ToDo.Repositories.Repositories
 
         public async Task<long?> TodoUpdateAsync(long todoId, TodoItem todoItem)
         {
-            var todo = await appDbContext.TodoItems.FirstOrDefaultAsync(t => t.Id == todoId);
+            var todo = await appDbContext.TodoItems
+                .FirstOrDefaultAsync(t => t.Id == todoId);
             
             if (todo == null) return null;
 
@@ -33,6 +34,21 @@ namespace ToDo.Repositories.Repositories
 
             await appDbContext.SaveChangesAsync();
             
+            return todo.Id;
+        }
+
+        public async Task<long?> TodoUpdateCompletionStatusAsync(long userId, long todoId, bool isCompleted)
+        {
+            var todo = await appDbContext.TodoItems
+                .FirstOrDefaultAsync(t => t.Id == todoId && t.UserId == userId);
+
+            if (todo == null) return null;
+
+            todo.IsCompleted = isCompleted;
+            todo.UpdatedAt = DateTime.UtcNow;
+
+            await appDbContext.SaveChangesAsync();
+
             return todo.Id;
         }
     }

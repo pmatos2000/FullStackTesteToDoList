@@ -26,6 +26,7 @@
 
         public const string ERRO_OPTIONAL_ID = "O valor deve ser null ou maior que zero.";
 
+        public const string SUCESS_TODO_UPDATE = "Tarefa atualizada.";
         public const string SUCESS_TODO_UPDATE_STATUS = "Status de conclusão da tarefa atualizado.";
     }
 }

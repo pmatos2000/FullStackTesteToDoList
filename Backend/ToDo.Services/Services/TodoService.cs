@@ -26,6 +26,11 @@ namespace ToDo.Services.Services
             return todoRepositorie.TodoUpdateAsync(todoId, todoItem);
         }
 
+        public Task<long?> TodoUpdateCompletionStatusAsync(long userId, long todoId, bool isCompleted)
+        {
+            return todoRepositorie.TodoUpdateCompletionStatusAsync(userId, todoId, isCompleted);
+        }
+
         private TodoItem ConvertTodoCreateDtoToEntity(TodoCreateDto todoCreateDto)
         {
             return new TodoItem
