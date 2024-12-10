@@ -31,7 +31,7 @@ namespace ToDo.Services.Services
             return todoRepositorie.TodoUpdateCompletionStatusAsync(userId, todoId, isCompleted);
         }
 
-        private TodoItem ConvertTodoCreateDtoToEntity(TodoCreateDto todoCreateDto)
+        private static TodoItem ConvertTodoCreateDtoToEntity(TodoCreateDto todoCreateDto)
         {
             return new TodoItem
             {
@@ -40,6 +40,27 @@ namespace ToDo.Services.Services
                 IsCompleted = todoCreateDto.IsCompleted,
                 UserId = todoCreateDto.UserId,
                 CategoryId = todoCreateDto.CategoryId,
+            };
+        }
+
+        public async Task<TodoItemDto?> GetTodoAsync(long userId, long id)
+        {
+            var todoItem = await todoRepositorie.GetTodoAsync(userId, id);
+            if (todoItem == null) return null;
+            return ConvertTodoItemEntityToDto(todoItem);
+        }
+
+        private static TodoItemDto ConvertTodoItemEntityToDto(TodoItem item)
+        {
+            return new TodoItemDto
+            {
+                Id = item.Id,
+                Title = item.Title,
+                Description = item.Description,
+                IsCompleted = item.IsCompleted,
+                CategoryId = item.CategoryId,
+                CreatedAt = item.CreatedAt,
+                UpdatedAt = item.UpdatedAt
             };
         }
     }

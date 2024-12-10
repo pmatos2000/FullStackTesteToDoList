@@ -105,6 +105,36 @@ namespace ToDo.API.Controllers
         }
 
 
+        /// <summary>
+        /// Recupera uma tarefa existente para o usuário logado pelo ID fornecido.
+        /// </summary>
+        /// <param name="id">O ID da tarefa a ser retornada.</param>
+        /// <returns>Retorna a tarefa correspondente ao ID fornecido ou um status indicando o resultado da operação.</returns>
+        /// <response code="200">A tarefa foi encontrada e retornada com sucesso.</response>
+        /// <response code="401">As credenciais estão incorretas ou o usuário não está autenticado.</response>
+        /// <response code="404">A tarefa não foi encontrada.</response>
+        /// <response code="500">Ocorreu um erro interno no servidor.</response>
+        [HttpGet("{id}")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(typeof(MessageResponseModel), StatusCodes.Status401Unauthorized)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
+        public async Task<IActionResult> GetTodoAsync(long id)
+        {
+            var userId = GetUsetIdFromJwtToken();
+            
+            if (userId == null)
+                return Unauthorized(new MessageResponseModel(Messages.ERRO_INVALID_CREDENTIALS));
+            
+            var todo = await todoService.GetTodoAsync(userId.Value, id);
+
+            if (todo == null) return NotFound();
+
+            var todoModel = ConvertTodoItemDtoToModel(todo);
+
+            return Ok(todoModel);
+        }
+
         private static TodoCreateDto ConvertTodoCreateModelToDto(TodoCreateModel todoCreateDto, long userId)
         {
             return new TodoCreateDto
@@ -114,6 +144,20 @@ namespace ToDo.API.Controllers
                 IsCompleted = todoCreateDto.IsCompleted,
                 CategoryId = todoCreateDto.CategoryId,
                 UserId = userId
+            };
+        }
+
+        private static TodoItemModel ConvertTodoItemDtoToModel(TodoItemDto item)
+        {
+            return new TodoItemModel
+            {
+                Id = item.Id,
+                Title = item.Title,
+                Description = item.Description,
+                IsCompleted = item.IsCompleted,
+                CategoryId = item.CategoryId,
+                CreatedAt = item.CreatedAt,
+                UpdatedAt = item.UpdatedAt
             };
         }
     }

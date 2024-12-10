@@ -19,6 +19,12 @@ namespace ToDo.Repositories.Repositories
             return newTodoItem.Entity.Id;
         }
 
+        public Task<TodoItem?> GetTodoAsync(long userId, long id)
+        {
+            return appDbContext.TodoItems
+                .FirstOrDefaultAsync(t => t.Id == id && t.UserId == userId);
+        }
+
         public async Task<long?> TodoUpdateAsync(long todoId, TodoItem todoItem)
         {
             var todo = await appDbContext.TodoItems
