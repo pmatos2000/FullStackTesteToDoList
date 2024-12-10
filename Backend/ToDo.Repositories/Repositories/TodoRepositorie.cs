@@ -37,7 +37,7 @@ namespace ToDo.Repositories.Repositories
         {
             var query = appDbContext.TodoItems.Where(x => x.UserId == userId);
 
-            if(categoryId.HasValue)
+            if (categoryId.HasValue)
             {
                 query = query.Where(query => query.CategoryId == categoryId.Value);
             }
@@ -57,7 +57,7 @@ namespace ToDo.Repositories.Repositories
         {
             var todo = await appDbContext.TodoItems
                 .FirstOrDefaultAsync(t => t.Id == todoId && t.UserId == todoItem.UserId);
-            
+
             if (todo == null) return null;
 
             todo.Title = todoItem.Title;
@@ -67,7 +67,7 @@ namespace ToDo.Repositories.Repositories
             todo.UpdatedAt = DateTime.UtcNow;
 
             await appDbContext.SaveChangesAsync();
-            
+
             return todo.Id;
         }
 

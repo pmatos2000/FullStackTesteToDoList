@@ -1,8 +1,5 @@
-﻿using Microsoft.AspNetCore.Http.HttpResults;
-using Microsoft.AspNetCore.Mvc;
-using System.Net;
+﻿using Microsoft.AspNetCore.Mvc;
 using ToDo.API.Models;
-using ToDo.Repositories.Model;
 using ToDo.Services.Dto;
 using ToDo.Services.Interfaces;
 using ToDo.Shared.Constants;
@@ -132,10 +129,10 @@ namespace ToDo.API.Controllers
         public async Task<IActionResult> GetTodoAsync(long id)
         {
             var userId = GetUsetIdFromJwtToken();
-            
+
             if (userId == null)
                 return Unauthorized(new MessageResponseModel(Messages.ERRO_INVALID_CREDENTIALS));
-            
+
             var todo = await todoService.GetTodoAsync(userId.Value, id);
 
             if (todo == null) return NotFound();
@@ -192,7 +189,7 @@ namespace ToDo.API.Controllers
 
             var result = await todoService.DeleteTodoAsync(userId.Value, id);
 
-            if(result == null) return NotFound();
+            if (result == null) return NotFound();
 
             return Ok(new MessageResponseModel(Messages.SUCESS_TODO_DELETE));
         }

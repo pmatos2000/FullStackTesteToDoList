@@ -1,12 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using ToDo.Repositories.Entitys;
-using ToDo.Repositories.Model;
-
-namespace ToDo.Services.Dto
+﻿namespace ToDo.Services.Dto
 {
     public record TodoItemDto
     {
