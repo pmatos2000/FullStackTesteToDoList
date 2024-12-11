@@ -85,7 +85,7 @@ const TaskTable: FC<TaskTableProps> = ({
                 {todo.isCompleted ? "Sim" : "Não"}
               </StyledTableCell>
               <StyledTableCell align="center" width="20%">
-                {todo.createAt.format(MASK_DATE)}
+                {todo.createdAt.format(MASK_DATE)}
               </StyledTableCell>
               <StyledTableCell align="center" width="15%">
                 <IconButton

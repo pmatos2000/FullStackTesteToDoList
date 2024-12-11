@@ -5,12 +5,14 @@ import Login from "../pages/Login";
 import ContainerPage from "./ContainerPage";
 import NewTask from "../pages/NewTask";
 import EditTask from "../pages/EditTask";
+import Register from "../pages/Register";
 
 export const PathRoter = {
   LOGIN: "/",
   TASKS: "/tasks",
   NEW_TASK: "/new/task",
   EDIT_TASK: "/edit/task",
+  REGISTER_USER: "/register",
 };
 
 const router = createBrowserRouter([
@@ -43,6 +45,14 @@ const router = createBrowserRouter([
     element: (
       <ContainerPage>
         <EditTask />
+      </ContainerPage>
+    ),
+  },
+  {
+    path: PathRoter.REGISTER_USER,
+    element: (
+      <ContainerPage>
+        <Register />
       </ContainerPage>
     ),
   },
