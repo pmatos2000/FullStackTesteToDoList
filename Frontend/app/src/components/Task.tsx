@@ -13,7 +13,9 @@ import {
   Select,
   styled,
   TextField,
+  Typography,
 } from "@mui/material";
+import { MASK_DATE } from "../util/Consts";
 
 interface TaskProps {
   todo: TodoEdit;
@@ -36,6 +38,16 @@ const Task: FC<TaskProps> = ({ todo, setTodo, onSubmit, listCategory }) => {
       <CardContent>
         <form onSubmit={handleSubmit}>
           <Box gap="16px" padding="16px">
+            {todo.createAt && todo.updatedAt && (
+              <Box display="flex" gap="16px" justifyContent="space-between">
+                <Typography variant="h6">{`Data criação: ${todo.createAt.format(
+                  MASK_DATE
+                )}`}</Typography>
+                <Typography variant="h6">{`Data edição: ${todo.updatedAt.format(
+                  MASK_DATE
+                )}`}</Typography>
+              </Box>
+            )}
             <TextField
               variant="outlined"
               margin="normal"
