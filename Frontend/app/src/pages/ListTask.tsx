@@ -2,6 +2,8 @@ import { FC, useEffect, useState } from "react";
 import { TodoItem } from "../types";
 import TaskService from "../services/TaskService";
 import Loading from "../components/Loading";
+import { Typography } from "@mui/material";
+import TaskTable from "../components/TaskTable";
 
 const ListTask: FC = () => {
   const [fetchingTodoList, setFetchingTodoList] = useState<boolean>(true);
@@ -18,12 +20,12 @@ const ListTask: FC = () => {
     executeFetchTodoList();
   }, []);
 
-  if (fetchingTodoList) {
-    return <Loading text="Buscando tarefas..." />;
-  } else if (listTodo.length) {
-    return "Tabela";
-  }
-  return "Nenhuma tarefa encontrada";
+  if (fetchingTodoList) return <Loading text="Buscando tarefas..." />;
+
+  if (listTodo.length === 0)
+    return <Typography variant="h5">Nenhuma tarefa encontrada</Typography>;
+
+  return <TaskTable listTodo={listTodo} />;
 };
 
 export default ListTask;
