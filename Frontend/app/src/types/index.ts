@@ -7,6 +7,7 @@ import CategoryResponse from "./CategoryResponse";
 import TodoEdit from "./TodoEdit";
 import TodoCreateRequest from "./TodoCreateRequest";
 import IdResponse from "./IdResponse";
+import TodoUpdateRequest from "./TodoUpdateRequest";
 
 export type {
   LoginRequest,
@@ -18,4 +19,5 @@ export type {
   TodoEdit,
   TodoCreateRequest,
   IdResponse,
+  TodoUpdateRequest,
 };
