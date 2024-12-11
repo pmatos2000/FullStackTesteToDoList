@@ -20,12 +20,14 @@ const ListTask: FC = () => {
     executeFetchTodoList();
   }, []);
 
-  if (fetchingTodoList) return <Loading text="Buscando tarefas..." />;
+  const GetTaskTable = () => {
+    if (fetchingTodoList) return <Loading text="Buscando tarefas..." />;
+    if (listTodo.length === 0)
+      return <Typography variant="h5">Nenhuma tarefa encontrada</Typography>;
+    return <TaskTable listTodo={listTodo} />;
+  };
 
-  if (listTodo.length === 0)
-    return <Typography variant="h5">Nenhuma tarefa encontrada</Typography>;
-
-  return <TaskTable listTodo={listTodo} />;
+  return GetTaskTable();
 };
 
 export default ListTask;
