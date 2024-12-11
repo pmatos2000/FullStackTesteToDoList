@@ -40,6 +40,14 @@ class TaskService {
     }
     return true;
   }
+  async confirmTodo(id: number): Promise<boolean> {
+    const responde = await TaskRepositorie.confirmTodo(id);
+    if (responde instanceof Error) {
+      console.error(responde);
+      return false;
+    }
+    return true;
+  }
 }
 
 export default new TaskService();

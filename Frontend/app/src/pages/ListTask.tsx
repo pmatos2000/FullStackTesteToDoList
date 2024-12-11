@@ -25,6 +25,8 @@ const ListTask: FC = () => {
 
   const [executingDeleteTodo, setExecutingDeleteTodo] =
     useState<boolean>(false);
+  const [executingConfirmationTodo, setExecutingConfirmationTodo] =
+    useState<boolean>(false);
 
   const navigate = useNavigate();
 
@@ -51,6 +53,20 @@ const ListTask: FC = () => {
       setListTodo((list) => list.filter((x) => x.id !== id));
     }
     setExecutingDeleteTodo(false);
+  };
+
+  const executeConfirmTodo = async (id: number) => {
+    setExecutingConfirmationTodo(true);
+    const result = await TaskService.confirmTodo(id);
+    if (result) {
+      setListTodo((list) =>
+        list.map((x) => ({
+          ...x,
+          isCompleted: x.id === id ? true : x.isCompleted,
+        }))
+      );
+    }
+    setExecutingConfirmationTodo(false);
   };
 
   useEffect(() => {
@@ -85,10 +101,15 @@ const ListTask: FC = () => {
             listTodo={listTodo}
             listCategory={listCategory}
             onClickDelete={executeDeleteTodo}
+            onClickConfirm={executeConfirmTodo}
           />
         )}
       </Container>
       <ModalLoading open={executingDeleteTodo} text="Apagando a tarefa..." />
+      <ModalLoading
+        open={executingConfirmationTodo}
+        text="Confirmando a tarefa..."
+      />
     </LayoutPage>
   );
 };

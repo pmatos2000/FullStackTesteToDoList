@@ -25,6 +25,17 @@ class TaskRepositorie {
       .then((res) => res.data)
       .catch((error: Error) => error);
   }
+
+  confirmTodo(id: number) {
+    const query = new URLSearchParams();
+    query.append("id", id.toString());
+    query.append("isCompleted", "true");
+    const url = `task/update-completed?${query.toString()}`;
+    return axiosInstance
+      .patch<MessageResponse>(url)
+      .then((res) => res.data)
+      .catch((error: Error) => error);
+  }
 }
 
 export default new TaskRepositorie();

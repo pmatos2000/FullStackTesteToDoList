@@ -19,6 +19,7 @@ interface TaskTableProps {
   listTodo: TodoItem[];
   listCategory: Category[];
   onClickDelete: (id: number) => void;
+  onClickConfirm: (id: number) => void;
 }
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
@@ -44,6 +45,7 @@ const TaskTable: FC<TaskTableProps> = ({
   listTodo,
   listCategory,
   onClickDelete,
+  onClickConfirm,
 }) => {
   return (
     <TableContainer component={Paper}>
@@ -84,7 +86,10 @@ const TaskTable: FC<TaskTableProps> = ({
                 {todo.createAt.format(MASK_DATE)}
               </StyledTableCell>
               <StyledTableCell align="center" width="15%">
-                <IconButton>
+                <IconButton
+                  disabled={todo.isCompleted}
+                  onClick={() => onClickConfirm(todo.id)}
+                >
                   <CheckCircle />
                 </IconButton>
                 <IconButton>
