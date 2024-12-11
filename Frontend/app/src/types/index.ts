@@ -4,6 +4,7 @@ import TodoItem from "./TodoItem";
 import TodoItemResponse from "./TodoItemResponse";
 import Category from "./Category";
 import CategoryResponse from "./CategoryResponse";
+import TodoEdit from "./TodoEdit";
 
 export type {
   LoginRequest,
@@ -12,4 +13,5 @@ export type {
   TodoItemResponse,
   Category,
   CategoryResponse,
+  TodoEdit,
 };

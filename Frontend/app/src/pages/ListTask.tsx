@@ -6,6 +6,8 @@ import { Box, Button, styled, Typography } from "@mui/material";
 import TaskTable from "../components/TaskTable";
 import LayoutPage from "../components/LayoutPage";
 import CategoryService from "../services/CategoryService";
+import { useNavigate } from "react-router-dom";
+import { PathRoter } from "../routes/Router";
 
 const Container = styled(Box)({
   display: "flex",
@@ -30,6 +32,8 @@ const ListTask: FC = () => {
   const [fetchingTodoList, setFetchingTodoList] = useState<boolean>(true);
   const [listTodo, setListTodo] = useState<TodoItem[]>([]);
   const [listCategory, setListCategory] = useState<Category[]>([]);
+
+  const navigate = useNavigate();
 
   const fetchDate = fetchingCategoryList || fetchingTodoList;
 
@@ -61,7 +65,11 @@ const ListTask: FC = () => {
             <Button variant="contained" color="primary">
               Criar categoria
             </Button>
-            <Button variant="contained" color="primary">
+            <Button
+              variant="contained"
+              color="primary"
+              onClick={() => navigate(PathRoter.NEW_TASK)}
+            >
               Criar tarefa
             </Button>
           </Box>
