@@ -1,23 +1,32 @@
 import TaskRepositorie from "../repositories/TaskRepositorie";
-import { TodoCreateRequest, TodoEdit, TodoItem } from "../types";
+import {
+  TodoCreateRequest,
+  TodoEdit,
+  TodoItem,
+  TodoItemResponse,
+} from "../types";
 import moment from "moment";
 
 class TaskService {
+  #converteTodoItemRespondeToTodoItem(res: TodoItemResponse): TodoItem {
+    return {
+      id: res.id,
+      title: res.title,
+      description: res.description,
+      isCompleted: res.isCompleted,
+      createAt: moment(res.createAt),
+      updatedAt: moment(res.updatedAt),
+      categoryId: res.categoryId,
+    };
+  }
+
   async getListTodo(): Promise<TodoItem[]> {
     const response = await TaskRepositorie.getListTodo();
     if (response instanceof Error) {
       console.log(response.message);
       return [];
     }
-    return response.map((x) => ({
-      id: x.id,
-      title: x.title,
-      description: x.description,
-      isCompleted: x.isCompleted,
-      createAt: moment(x.createAt),
-      updatedAt: moment(x.updatedAt),
-      categoryId: x.categoryId,
-    }));
+    return response.map((x) => this.#converteTodoItemRespondeToTodoItem(x));
   }
 
   async createTodo(todo: TodoEdit): Promise<number | Error> {
@@ -33,20 +42,29 @@ class TaskService {
   }
 
   async deleteTodo(id: number): Promise<boolean> {
-    const responde = await TaskRepositorie.deleteTodo(id);
-    if (responde instanceof Error) {
-      console.error(responde);
+    const response = await TaskRepositorie.deleteTodo(id);
+    if (response instanceof Error) {
+      console.error(response.message);
       return false;
     }
     return true;
   }
   async confirmTodo(id: number): Promise<boolean> {
-    const responde = await TaskRepositorie.confirmTodo(id);
-    if (responde instanceof Error) {
-      console.error(responde);
+    const response = await TaskRepositorie.confirmTodo(id);
+    if (response instanceof Error) {
+      console.error(response.message);
       return false;
     }
     return true;
+  }
+
+  async getTodo(id: number): Promise<TodoItem | null> {
+    const response = await TaskRepositorie.getTodo(id);
+    if (response instanceof Error) {
+      console.error(response.message);
+      return null;
+    }
+    return this.#converteTodoItemRespondeToTodoItem(response);
   }
 }
 

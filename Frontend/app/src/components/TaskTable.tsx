@@ -20,6 +20,7 @@ interface TaskTableProps {
   listCategory: Category[];
   onClickDelete: (id: number) => void;
   onClickConfirm: (id: number) => void;
+  onClickEdit: (id: number) => void;
 }
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
@@ -46,6 +47,7 @@ const TaskTable: FC<TaskTableProps> = ({
   listCategory,
   onClickDelete,
   onClickConfirm,
+  onClickEdit,
 }) => {
   return (
     <TableContainer component={Paper}>
@@ -92,7 +94,7 @@ const TaskTable: FC<TaskTableProps> = ({
                 >
                   <CheckCircle />
                 </IconButton>
-                <IconButton>
+                <IconButton onClick={() => onClickEdit(todo.id)}>
                   <Edit />
                 </IconButton>
                 <IconButton onClick={() => onClickDelete(todo.id)}>

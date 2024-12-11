@@ -36,6 +36,14 @@ class TaskRepositorie {
       .then((res) => res.data)
       .catch((error: Error) => error);
   }
+
+  getTodo(id: number) {
+    const url = `task/${id}`;
+    return axiosInstance
+      .get<TodoItemResponse>(url)
+      .then((res) => res.data)
+      .catch((error: Error) => error);
+  }
 }
 
 export default new TaskRepositorie();

@@ -69,6 +69,13 @@ const ListTask: FC = () => {
     setExecutingConfirmationTodo(false);
   };
 
+  const executeEditeTodo = (id: number) => {
+    const query = new URLSearchParams();
+    query.append("id", id.toString());
+    const url = `${PathRoter.EDIT_TASK}?${query.toString()}`;
+    navigate(url);
+  };
+
   useEffect(() => {
     executeFetchTodoList();
     executeFetchCategoryList();
@@ -102,6 +109,7 @@ const ListTask: FC = () => {
             listCategory={listCategory}
             onClickDelete={executeDeleteTodo}
             onClickConfirm={executeConfirmTodo}
+            onClickEdit={executeEditeTodo}
           />
         )}
       </Container>
