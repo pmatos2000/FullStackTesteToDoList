@@ -1,10 +1,20 @@
 import { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
-import "./index.css";
-import App from "./App.tsx";
+import { Box } from "@mui/material";
+import { styled } from "@mui/system";
+import Router from "./routes/Router";
+
+const Container = styled(Box)({
+  display: "flex",
+  justifyContent: "center",
+  alignItems: "center",
+  height: "100vh",
+});
 
 createRoot(document.getElementById("root")!).render(
   <StrictMode>
-    <App />
+    <Container>
+      <Router />
+    </Container>
   </StrictMode>
 );
