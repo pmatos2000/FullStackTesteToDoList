@@ -76,6 +76,8 @@ namespace ToDo.API
             app.UseAuthorization();
 
             app.MapControllers();
+
+            app.UseCors(builder => builder.AllowAnyOrigin().AllowAnyHeader().AllowAnyMethod());
         }
 
 
