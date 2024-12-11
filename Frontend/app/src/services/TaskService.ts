@@ -15,7 +15,7 @@ class TaskService {
       title: res.title,
       description: res.description,
       isCompleted: res.isCompleted,
-      createAt: moment(res.createAt),
+      createAt: moment(res.createdAt),
       updatedAt: moment(res.updatedAt),
       categoryId: res.categoryId,
     };

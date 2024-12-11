@@ -5,7 +5,7 @@ interface TodoItem {
   title: string;
   description: string;
   isCompleted: boolean;
-  createAt: Moment;
+  createdAt: Moment;
   updatedAt: Moment;
   categoryId: number | null;
 }

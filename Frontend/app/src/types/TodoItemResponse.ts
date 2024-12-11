@@ -3,7 +3,7 @@ interface TodoItemResponse {
   title: string;
   description: string;
   isCompleted: boolean;
-  createAt: string;
+  createdAt: string;
   updatedAt: string;
   categoryId: number | null;
 }
