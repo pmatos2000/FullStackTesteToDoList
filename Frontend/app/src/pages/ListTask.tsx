@@ -1,10 +1,11 @@
 import { FC, useEffect, useState } from "react";
-import { TodoItem } from "../types";
+import { Category, TodoItem } from "../types";
 import TaskService from "../services/TaskService";
 import Loading from "../components/Loading";
 import { Box, Button, styled, Typography } from "@mui/material";
 import TaskTable from "../components/TaskTable";
 import LayoutPage from "../components/LayoutPage";
+import CategoryService from "../services/CategoryService";
 
 const Container = styled(Box)({
   display: "flex",
@@ -12,16 +13,25 @@ const Container = styled(Box)({
   flexDirection: "column",
 });
 
-const GetTaskTable = (fetchingTodoList: boolean, listTodo: TodoItem[]) => {
-  if (fetchingTodoList) return <Loading text="Buscando tarefas..." />;
+const GetTaskTable = (
+  fetchDate: boolean,
+  listTodo: TodoItem[],
+  listCategory: Category[]
+) => {
+  if (fetchDate) return <Loading text="Buscando tarefas..." />;
   if (listTodo.length === 0)
     return <Typography variant="h5">Nenhuma tarefa encontrada</Typography>;
-  return <TaskTable listTodo={listTodo} />;
+  return <TaskTable listTodo={listTodo} listCategory={listCategory} />;
 };
 
 const ListTask: FC = () => {
+  const [fetchingCategoryList, setFetchingCategoryList] =
+    useState<boolean>(true);
   const [fetchingTodoList, setFetchingTodoList] = useState<boolean>(true);
   const [listTodo, setListTodo] = useState<TodoItem[]>([]);
+  const [listCategory, setListCategory] = useState<Category[]>([]);
+
+  const fetchDate = fetchingCategoryList || fetchingTodoList;
 
   const executeFetchTodoList = async () => {
     setFetchingTodoList(true);
@@ -30,8 +40,16 @@ const ListTask: FC = () => {
     setFetchingTodoList(false);
   };
 
+  const executeFetchCategoryList = async () => {
+    setFetchingCategoryList(true);
+    const newListCategory = await CategoryService.getListCategory();
+    setListCategory(newListCategory);
+    setFetchingCategoryList(false);
+  };
+
   useEffect(() => {
     executeFetchTodoList();
+    executeFetchCategoryList();
   }, []);
 
   return (
@@ -48,7 +66,7 @@ const ListTask: FC = () => {
             </Button>
           </Box>
         </Box>
-        {GetTaskTable(fetchingTodoList, listTodo)}
+        {GetTaskTable(fetchDate, listTodo, listCategory)}
       </Container>
     </LayoutPage>
   );

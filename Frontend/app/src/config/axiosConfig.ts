@@ -42,6 +42,8 @@ axiosInstance.interceptors.response.use(
         Promise.reject(new Error(Mensages.ERROR_NOT_FOUND));
       }
     }
+    console.error(error);
+    if (globalRouter.navigate) globalRouter.navigate(PathRoter.LOGIN);
     return Promise.reject(new Error(Mensages.ERROR_UNKNOWN));
   }
 );

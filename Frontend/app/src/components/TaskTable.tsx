@@ -1,5 +1,5 @@
 import { FC } from "react";
-import { TodoItem } from "../types";
+import { Category, TodoItem } from "../types";
 import {
   IconButton,
   Paper,
@@ -17,6 +17,7 @@ import { CheckCircle, Delete, Edit } from "@mui/icons-material";
 
 interface TaskTableProps {
   listTodo: TodoItem[];
+  listCategory: Category[];
 }
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
@@ -39,7 +40,7 @@ const StyledTableRow = styled(TableRow)(({ theme }) => ({
   },
 }));
 
-const TaskTable: FC<TaskTableProps> = ({ listTodo }) => {
+const TaskTable: FC<TaskTableProps> = ({ listTodo, listCategory }) => {
   return (
     <TableContainer component={Paper}>
       <Table aria-label="Task Table">
@@ -69,7 +70,8 @@ const TaskTable: FC<TaskTableProps> = ({ listTodo }) => {
               </StyledTableCell>
               <StyledTableCell width="30%">{todo.title}</StyledTableCell>
               <StyledTableCell align="center" width="25%">
-                {todo.categoryId}
+                {listCategory?.find((x) => x.id === todo.categoryId)?.name ??
+                  "-"}
               </StyledTableCell>
               <StyledTableCell align="center" width="5%">
                 {todo.isCompleted ? "Sim" : "Não"}
