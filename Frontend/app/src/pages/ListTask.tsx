@@ -8,6 +8,7 @@ import LayoutPage from "../components/LayoutPage";
 import CategoryService from "../services/CategoryService";
 import { useNavigate } from "react-router-dom";
 import { PathRoter } from "../routes/Router";
+import ModalLoading from "../components/ModalLoadign";
 
 const Container = styled(Box)({
   display: "flex",
@@ -15,23 +16,15 @@ const Container = styled(Box)({
   flexDirection: "column",
 });
 
-const GetTaskTable = (
-  fetchDate: boolean,
-  listTodo: TodoItem[],
-  listCategory: Category[]
-) => {
-  if (fetchDate) return <Loading text="Buscando tarefas..." />;
-  if (listTodo.length === 0)
-    return <Typography variant="h5">Nenhuma tarefa encontrada</Typography>;
-  return <TaskTable listTodo={listTodo} listCategory={listCategory} />;
-};
-
 const ListTask: FC = () => {
   const [fetchingCategoryList, setFetchingCategoryList] =
     useState<boolean>(true);
   const [fetchingTodoList, setFetchingTodoList] = useState<boolean>(true);
   const [listTodo, setListTodo] = useState<TodoItem[]>([]);
   const [listCategory, setListCategory] = useState<Category[]>([]);
+
+  const [executingDeleteTodo, setExecutingDeleteTodo] =
+    useState<boolean>(false);
 
   const navigate = useNavigate();
 
@@ -49,6 +42,15 @@ const ListTask: FC = () => {
     const newListCategory = await CategoryService.getListCategory();
     setListCategory(newListCategory);
     setFetchingCategoryList(false);
+  };
+
+  const executeDeleteTodo = async (id: number) => {
+    setExecutingDeleteTodo(true);
+    const result = await TaskService.deleteTodo(id);
+    if (result) {
+      setListTodo((list) => list.filter((x) => x.id !== id));
+    }
+    setExecutingDeleteTodo(false);
   };
 
   useEffect(() => {
@@ -74,8 +76,19 @@ const ListTask: FC = () => {
             </Button>
           </Box>
         </Box>
-        {GetTaskTable(fetchDate, listTodo, listCategory)}
+        {fetchDate && <Loading text="Buscando tarefas..." />}
+        {listTodo.length === 0 && (
+          <Typography variant="h5">Nenhuma tarefa encontrada</Typography>
+        )}
+        {listTodo.length > 0 && (
+          <TaskTable
+            listTodo={listTodo}
+            listCategory={listCategory}
+            onClickDelete={executeDeleteTodo}
+          />
+        )}
       </Container>
+      <ModalLoading open={executingDeleteTodo} text="Apagando a tarefa..." />
     </LayoutPage>
   );
 };

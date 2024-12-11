@@ -18,6 +18,7 @@ import { CheckCircle, Delete, Edit } from "@mui/icons-material";
 interface TaskTableProps {
   listTodo: TodoItem[];
   listCategory: Category[];
+  onClickDelete: (id: number) => void;
 }
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
@@ -39,7 +40,11 @@ const StyledTableRow = styled(TableRow)(({ theme }) => ({
   },
 }));
 
-const TaskTable: FC<TaskTableProps> = ({ listTodo, listCategory }) => {
+const TaskTable: FC<TaskTableProps> = ({
+  listTodo,
+  listCategory,
+  onClickDelete,
+}) => {
   return (
     <TableContainer component={Paper}>
       <Table aria-label="Task Table">
@@ -85,7 +90,7 @@ const TaskTable: FC<TaskTableProps> = ({ listTodo, listCategory }) => {
                 <IconButton>
                   <Edit />
                 </IconButton>
-                <IconButton>
+                <IconButton onClick={() => onClickDelete(todo.id)}>
                   <Delete />
                 </IconButton>
               </StyledTableCell>

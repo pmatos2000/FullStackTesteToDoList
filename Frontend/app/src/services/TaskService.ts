@@ -31,6 +31,15 @@ class TaskService {
     if (response instanceof Error) return response;
     return response.id;
   }
+
+  async deleteTodo(id: number): Promise<boolean> {
+    const responde = await TaskRepositorie.deleteTodo(id);
+    if (responde instanceof Error) {
+      console.error(responde);
+      return false;
+    }
+    return true;
+  }
 }
 
 export default new TaskService();
