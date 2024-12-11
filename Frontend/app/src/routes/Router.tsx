@@ -3,9 +3,14 @@ import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import ListTask from "../pages/ListTask";
 import Login from "../pages/Login";
 
+export const PathRoter = {
+  LOGIN: "/",
+  TASKS: "/tasks",
+};
+
 const router = createBrowserRouter([
-  { path: "/", element: <Login /> },
-  { path: "/tasks", element: <ListTask /> },
+  { path: PathRoter.LOGIN, element: <Login /> },
+  { path: PathRoter.TASKS, element: <ListTask /> },
 ]);
 
 const Router: FC = () => <RouterProvider router={router} />;

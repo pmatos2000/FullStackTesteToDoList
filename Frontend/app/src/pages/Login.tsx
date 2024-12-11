@@ -4,7 +4,6 @@ import {
   Button,
   Card,
   CardContent,
-  Snackbar,
   styled,
   TextField,
   Typography,
@@ -14,6 +13,9 @@ import { FC, FormEvent, useState } from "react";
 import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 import AuthService from "../services/AuthService";
 import PopupMessage from "../components/PopupMessage";
+import { TOKEN_NAME } from "../util/Values";
+import { useNavigate } from "react-router-dom";
+import { PathRoter } from "../routes/Router";
 
 const LoginCard = styled(Card)({
   minWidth: "275px",
@@ -40,6 +42,7 @@ const Login: FC = () => {
   const [password, setPassword] = useState<string>("");
   const [loggingIn, setLoggingIn] = useState<boolean>(false);
   const [error, setError] = useState<string | null>(null);
+  const navigate = useNavigate();
 
   const login = async () => {
     setLoggingIn(true);
@@ -48,7 +51,8 @@ const Login: FC = () => {
       console.log(response.message);
       setError(response.message);
     } else {
-      localStorage.setItem("token", response.jwtToken);
+      localStorage.setItem(TOKEN_NAME, response.jwtToken);
+      navigate(PathRoter.TASKS);
     }
     setLoggingIn(false);
   };
