@@ -1,4 +1,5 @@
-﻿using ToDo.Repositories.Interfaces;
+﻿using ToDo.Repositories.Entitys;
+using ToDo.Repositories.Interfaces;
 using ToDo.Services.Dto;
 using ToDo.Services.Interfaces;
 
@@ -21,12 +22,23 @@ namespace ToDo.Services.Services
 
             var newCategory = await categoryRepositorie.CreateCategoryAsync(userId, categoryName);
 
+            return ConvertCategoryEntityToDto(newCategory);
+
+        }
+
+        public async Task<IEnumerable<CategoryDto>> GetListCategoryAsync(long userId)
+        {
+            var listCategory = await categoryRepositorie.GetListCategoryAsync(userId);
+            return listCategory.Select(x => ConvertCategoryEntityToDto(x));
+        }
+
+        private static CategoryDto ConvertCategoryEntityToDto(Category category)
+        {
             return new CategoryDto
             {
-                Id = newCategory.Id,
-                Name = newCategory.Name,
+                Id = category.Id,
+                Name = category.Name,
             };
-
         }
     }
 }

@@ -23,6 +23,15 @@ namespace ToDo.Repositories.Repositories
             return newCategoy.Entity;
         }
 
+        public async Task<IEnumerable<Category>> GetListCategoryAsync(long userId)
+        {
+            var listCategory = await appDbContext.Categories
+                .Where(x => x.UserId == userId)
+                .ToListAsync();
+
+            return listCategory;
+        }
+
         public Task<bool> VerifyCategoryNameAsync(long userId, string categoryName)
         {
             var normalizedCategoryName = categoryName.ToLower();

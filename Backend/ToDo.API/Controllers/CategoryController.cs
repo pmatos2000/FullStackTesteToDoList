@@ -1,6 +1,7 @@
 ﻿
 using Microsoft.AspNetCore.Mvc;
 using ToDo.API.Models;
+using ToDo.Services.Dto;
 using ToDo.Services.Interfaces;
 using ToDo.Shared.Constants;
 
@@ -46,11 +47,39 @@ namespace ToDo.API.Controllers
             {
                 return Conflict(new MessageResponseModel(Messages.ERRO_CATEGORY_CONFLICT));
             }
-            return Ok(new CategoryModel
+            return Ok(ConvertCategoryDtoToModel(result));
+        }
+
+        /// <summary>
+        /// Recupera uma lista de categoria para o usuário logado.
+        /// </summary>
+        /// <returns>Retorna a lista de categoria</returns>
+        /// <response code="200">A lista de categoria foi recuperada com sucesso.</response>
+        /// <response code="401">As credenciais estão incorretas ou o usuário não está autenticado.</response>
+        /// <response code="500">Ocorreu um erro interno no servidor.</response>
+        [HttpGet("list")]
+        [ProducesResponseType(typeof(IEnumerable<CategoryModel>), StatusCodes.Status200OK)]
+        [ProducesResponseType(typeof(MessageResponseModel), StatusCodes.Status401Unauthorized)]
+        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
+        public async Task<IActionResult> GetListCategoryAsync()
+        {
+            var userId = GetUsetIdFromJwtToken();
+            if (userId == null) return Unauthorized(new MessageResponseModel(Messages.ERRO_INVALID_CREDENTIALS));
+
+            var listCategory = await categoryService.GetListCategoryAsync(userId.Value);
+
+            var listCategoryModel = listCategory.Select(x => ConvertCategoryDtoToModel(x));
+
+            return Ok(listCategoryModel);
+        }
+
+        private static CategoryModel ConvertCategoryDtoToModel(CategoryDto dto)
+        {
+            return new CategoryModel
             {
-                Id = result.Id,
-                Name = result.Name,
-            });
+                Id = dto.Id,
+                Name = dto.Name,
+            };
         }
 
     }
