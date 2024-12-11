@@ -11,6 +11,7 @@ import {
 import { FC, FormEvent, useState } from "react";
 
 import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
+import AuthService from "../services/AuthService";
 
 const LoginCard = styled(Card)({
   minWidth: "275px",
@@ -35,10 +36,23 @@ const LoginSubmit = styled(Button)({
 const Login: FC = () => {
   const [nameUser, setNameUser] = useState<string>("");
   const [password, setPassword] = useState<string>("");
+  const [loggingIn, setLoggingIn] = useState<boolean>(false);
+
+  const login = async () => {
+    setLoggingIn(true);
+    const response = await AuthService.Login(nameUser, password);
+    console.log(response);
+    if (response instanceof Error) {
+      console.log("ERRO");
+    } else {
+      localStorage.setItem("token", response.jwtToken);
+    }
+    setLoggingIn(false);
+  };
 
   const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    console.log(event.currentTarget.elements);
+    login();
   };
 
   return (
@@ -84,7 +98,7 @@ const Login: FC = () => {
             variant="contained"
             color="primary"
             className="login-submit"
-            disabled={nameUser.length < 3 || password.length < 8}
+            disabled={nameUser.length < 3 || password.length < 8 || loggingIn}
           >
             Entrar
           </LoginSubmit>
