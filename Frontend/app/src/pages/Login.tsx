@@ -16,6 +16,7 @@ import PopupMessage from "../components/PopupMessage";
 import { TOKEN_NAME } from "../util/Values";
 import { useNavigate } from "react-router-dom";
 import { PathRoter } from "../routes/Router";
+import LayoutPageCenter from "../components/LayoutPageCenter";
 
 const LoginCard = styled(Card)({
   minWidth: "275px",
@@ -63,56 +64,58 @@ const Login: FC = () => {
   };
 
   return (
-    <LoginCard>
-      <CardContent>
-        <Box textAlign="center">
-          <LoginAvatar>
-            <LockOutlinedIcon />
-          </LoginAvatar>
-          <Typography component="h1" variant="h5">
-            Login
-          </Typography>
-        </Box>
-        <LoginForm onSubmit={handleSubmit}>
-          <TextField
-            variant="outlined"
-            margin="normal"
-            required
-            fullWidth
-            id="userName"
-            label="Nome usuário"
-            name="userName"
-            value={nameUser}
-            onChange={(e) => setNameUser(e.target.value.trim())}
-            autoFocus
-          />
-          <TextField
-            variant="outlined"
-            margin="normal"
-            required
-            fullWidth
-            name="password"
-            label="Senha"
-            type="password"
-            id="password"
-            autoComplete="current-password"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-          />
-          <LoginSubmit
-            type="submit"
-            fullWidth
-            variant="contained"
-            color="primary"
-            className="login-submit"
-            disabled={nameUser.length < 3 || password.length < 8 || loggingIn}
-          >
-            Entrar
-          </LoginSubmit>
-        </LoginForm>
-      </CardContent>
-      <PopupMessage error={error} onCLose={() => setError(null)} />
-    </LoginCard>
+    <LayoutPageCenter>
+      <LoginCard>
+        <CardContent>
+          <Box textAlign="center">
+            <LoginAvatar>
+              <LockOutlinedIcon />
+            </LoginAvatar>
+            <Typography component="h1" variant="h5">
+              Login
+            </Typography>
+          </Box>
+          <LoginForm onSubmit={handleSubmit}>
+            <TextField
+              variant="outlined"
+              margin="normal"
+              required
+              fullWidth
+              id="userName"
+              label="Nome usuário"
+              name="userName"
+              value={nameUser}
+              onChange={(e) => setNameUser(e.target.value.trim())}
+              autoFocus
+            />
+            <TextField
+              variant="outlined"
+              margin="normal"
+              required
+              fullWidth
+              name="password"
+              label="Senha"
+              type="password"
+              id="password"
+              autoComplete="current-password"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+            />
+            <LoginSubmit
+              type="submit"
+              fullWidth
+              variant="contained"
+              color="primary"
+              className="login-submit"
+              disabled={nameUser.length < 3 || password.length < 8 || loggingIn}
+            >
+              Entrar
+            </LoginSubmit>
+          </LoginForm>
+        </CardContent>
+        <PopupMessage error={error} onCLose={() => setError(null)} />
+      </LoginCard>
+    </LayoutPageCenter>
   );
 };
 

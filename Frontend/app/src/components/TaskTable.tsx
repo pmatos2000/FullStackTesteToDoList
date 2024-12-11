@@ -39,13 +39,9 @@ const StyledTableRow = styled(TableRow)(({ theme }) => ({
   },
 }));
 
-const StyledPaper = styled(Paper)({
-  maxWidth: "1280px",
-});
-
 const TaskTable: FC<TaskTableProps> = ({ listTodo }) => {
   return (
-    <TableContainer component={StyledPaper}>
+    <TableContainer component={Paper}>
       <Table aria-label="Task Table">
         <TableHead>
           <TableRow>
