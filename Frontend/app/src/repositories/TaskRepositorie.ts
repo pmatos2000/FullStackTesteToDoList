@@ -1,11 +1,18 @@
 import axiosInstance from "../config/axiosConfig";
-import { TodoItemResponse } from "../types";
+import { IdResponse, TodoCreateRequest, TodoItemResponse } from "../types";
 
 class TaskRepositorie {
-  async GetListTodo() {
+  getListTodo() {
     const url = "task/list";
     return axiosInstance
       .get<TodoItemResponse[]>(url)
+      .then((res) => res.data)
+      .catch((error: Error) => error);
+  }
+
+  createTodo(req: TodoCreateRequest) {
+    return axiosInstance
+      .post<IdResponse>("task/create", req)
       .then((res) => res.data)
       .catch((error: Error) => error);
   }

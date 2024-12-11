@@ -1,7 +1,7 @@
 import { Box, styled, Typography } from "@mui/material";
 import { FC } from "react";
 
-interface FetchDataProps {
+interface LoadingProps {
   text: string;
 }
 
@@ -22,7 +22,7 @@ const LoadingAnimation = styled("div")({
   animation: "spin 1s linear infinite",
 });
 
-const Loading: FC<FetchDataProps> = ({ text }) => {
+const Loading: FC<LoadingProps> = ({ text }) => {
   return (
     <Box display="flex" flexDirection="column" alignItems="center">
       <LoadingAnimation />

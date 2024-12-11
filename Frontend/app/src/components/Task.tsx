@@ -5,7 +5,9 @@ import {
   Button,
   Card,
   CardContent,
+  Checkbox,
   FormControl,
+  FormControlLabel,
   InputLabel,
   MenuItem,
   Select,
@@ -81,6 +83,18 @@ const Task: FC<TaskProps> = ({ todo, setTodo, onSubmit, listCategory }) => {
                 ))}
               </Select>
             </FormControl>
+            <FormControlLabel
+              control={
+                <Checkbox
+                  checked={todo.isCompleted}
+                  onChange={(e) =>
+                    setTodo({ ...todo, isCompleted: e.target.checked })
+                  }
+                  color="primary"
+                />
+              }
+              label="Tarefa completa"
+            />
             <Submit
               type="submit"
               fullWidth

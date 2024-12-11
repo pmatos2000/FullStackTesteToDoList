@@ -1,10 +1,10 @@
 import TaskRepositorie from "../repositories/TaskRepositorie";
-import { TodoItem } from "../types";
+import { TodoCreateRequest, TodoEdit, TodoItem } from "../types";
 import moment from "moment";
 
 class TaskService {
-  async GetListTodo(): Promise<TodoItem[]> {
-    const response = await TaskRepositorie.GetListTodo();
+  async getListTodo(): Promise<TodoItem[]> {
+    const response = await TaskRepositorie.getListTodo();
     if (response instanceof Error) {
       console.log(response.message);
       return [];
@@ -18,6 +18,18 @@ class TaskService {
       updatedAt: moment(x.updatedAt),
       categoryId: x.categoryId,
     }));
+  }
+
+  async createTodo(todo: TodoEdit): Promise<number | Error> {
+    const req: TodoCreateRequest = {
+      title: todo.title,
+      description: todo.description,
+      isCompleted: todo.isCompleted,
+      categoryId: todo.categoryId,
+    };
+    const response = await TaskRepositorie.createTodo(req);
+    if (response instanceof Error) return response;
+    return response.id;
   }
 }
 

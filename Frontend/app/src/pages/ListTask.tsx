@@ -39,7 +39,7 @@ const ListTask: FC = () => {
 
   const executeFetchTodoList = async () => {
     setFetchingTodoList(true);
-    const newListTodo = await TaskService.GetListTodo();
+    const newListTodo = await TaskService.getListTodo();
     setListTodo(newListTodo);
     setFetchingTodoList(false);
   };
