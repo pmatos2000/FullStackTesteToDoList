@@ -11,7 +11,7 @@ class AuthRepositorie {
     const response = await axiosInstance
       .post<LoginResponse>("/auth/login", loginRequest)
       .then((res) => res.data)
-      .catch((_) => new Error("Aconteceu um erro"));
+      .catch((error: Error) => error);
 
     return response;
   }

@@ -41,9 +41,8 @@ const Login: FC = () => {
   const login = async () => {
     setLoggingIn(true);
     const response = await AuthService.Login(nameUser, password);
-    console.log(response);
     if (response instanceof Error) {
-      console.log("ERRO");
+      console.log(response.message);
     } else {
       localStorage.setItem("token", response.jwtToken);
     }
