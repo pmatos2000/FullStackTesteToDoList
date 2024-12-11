@@ -4,4 +4,4 @@ export const Mensages = {
   ERROR_UNKNOWN: "Erro desconhecido. Por favor, tente novamente.",
 };
 
-export const MASK_DATE = "DD/MM/YYYY [ás] HH:MM";
+export const MASK_DATE = "DD/MM/YYYY [ás] HH:mm";

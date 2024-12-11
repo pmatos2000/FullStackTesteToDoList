@@ -14,7 +14,7 @@ import Loading from "../components/Loading";
 const EditTask: FC = () => {
   const [todo, setTodo] = useState<TodoEdit>(TODO_EDIT_DEFAULT);
   const [listCategory, setListCategory] = useState<Category[]>([]);
-  const [executingTaskCreation, setExecutingTaskCreation] =
+  const [executingTaskUpdate, setExecutingTaskUpdate] =
     useState<boolean>(false);
   const [executingFetchTodo, setExecutingFetchTodo] = useState<boolean>(true);
 
@@ -51,14 +51,16 @@ const EditTask: FC = () => {
   }, []);
 
   const handleSubmit = async () => {
-    setExecutingTaskCreation(true);
-    const result = await TaskService.createTodo(todo);
-    if (result instanceof Error) {
-      console.error(result.message);
-    } else {
-      navigate(PathRoter.TASKS);
+    setExecutingTaskUpdate(true);
+    if (todo.id) {
+      const result = await TaskService.updateTodo(todo.id, todo);
+      if (result instanceof Error) {
+        console.error(result.message);
+      } else {
+        navigate(PathRoter.TASKS);
+      }
     }
-    setExecutingTaskCreation(false);
+    setExecutingTaskUpdate(false);
   };
 
   return (
@@ -77,7 +79,7 @@ const EditTask: FC = () => {
           />
         )}
       </Box>
-      <ModalLoading open={executingTaskCreation} text="Salvando a tarefa" />
+      <ModalLoading open={executingTaskUpdate} text="Atualizando a tarefa" />
     </LayoutPage>
   );
 };

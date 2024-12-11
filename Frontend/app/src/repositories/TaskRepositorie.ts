@@ -1,5 +1,10 @@
 import axiosInstance from "../config/axiosConfig";
-import { IdResponse, TodoCreateRequest, TodoItemResponse } from "../types";
+import {
+  IdResponse,
+  TodoCreateRequest,
+  TodoItemResponse,
+  TodoUpdateRequest,
+} from "../types";
 import MessageResponse from "../types/MessageResponse";
 
 class TaskRepositorie {
@@ -41,6 +46,13 @@ class TaskRepositorie {
     const url = `task/${id}`;
     return axiosInstance
       .get<TodoItemResponse>(url)
+      .then((res) => res.data)
+      .catch((error: Error) => error);
+  }
+
+  updateTodo(req: TodoUpdateRequest) {
+    return axiosInstance
+      .put<TodoItemResponse>("task/update", req)
       .then((res) => res.data)
       .catch((error: Error) => error);
   }

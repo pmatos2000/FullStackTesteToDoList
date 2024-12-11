@@ -4,6 +4,7 @@ import {
   TodoEdit,
   TodoItem,
   TodoItemResponse,
+  TodoUpdateRequest,
 } from "../types";
 import moment from "moment";
 
@@ -65,6 +66,19 @@ class TaskService {
       return null;
     }
     return this.#converteTodoItemRespondeToTodoItem(response);
+  }
+
+  async updateTodo(idTodo: number, todo: TodoEdit): Promise<number | Error> {
+    const req: TodoUpdateRequest = {
+      id: idTodo,
+      title: todo.title,
+      description: todo.description,
+      isCompleted: todo.isCompleted,
+      categoryId: todo.categoryId,
+    };
+    const response = await TaskRepositorie.updateTodo(req);
+    if (response instanceof Error) return response;
+    return response.id;
   }
 }
 
