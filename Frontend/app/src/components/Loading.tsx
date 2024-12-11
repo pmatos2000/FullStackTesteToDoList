@@ -23,7 +23,7 @@ const LoadingAnimation = styled("div")({
   animation: `${spin} 1s linear infinite`,
 });
 
-const FetchData: FC<FetchDataProps> = ({ text }) => {
+const Loading: FC<FetchDataProps> = ({ text }) => {
   return (
     <Box display="flex" flexDirection="column" alignItems="center">
       <LoadingAnimation />
@@ -32,4 +32,4 @@ const FetchData: FC<FetchDataProps> = ({ text }) => {
   );
 };
 
-export default FetchData;
+export default Loading;
