@@ -4,12 +4,6 @@ import { Mensages } from "../Util/Consts";
 
 const baseURL = "https://localhost:44391/api";
 
-if (!baseURL) {
-  throw new Error(
-    "A variável de ambiente 'REACT_APP_API_BASE_URL' não está definida."
-  );
-}
-
 const axiosInstance = axios.create({
   baseURL: baseURL,
 });
