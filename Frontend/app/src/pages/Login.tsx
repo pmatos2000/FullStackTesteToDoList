@@ -4,6 +4,7 @@ import {
   Button,
   Card,
   CardContent,
+  Snackbar,
   styled,
   TextField,
   Typography,
@@ -12,6 +13,7 @@ import { FC, FormEvent, useState } from "react";
 
 import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 import AuthService from "../services/AuthService";
+import PopupMessage from "../components/PopupMessage";
 
 const LoginCard = styled(Card)({
   minWidth: "275px",
@@ -37,12 +39,14 @@ const Login: FC = () => {
   const [nameUser, setNameUser] = useState<string>("");
   const [password, setPassword] = useState<string>("");
   const [loggingIn, setLoggingIn] = useState<boolean>(false);
+  const [error, setError] = useState<string | null>(null);
 
   const login = async () => {
     setLoggingIn(true);
     const response = await AuthService.Login(nameUser, password);
     if (response instanceof Error) {
       console.log(response.message);
+      setError(response.message);
     } else {
       localStorage.setItem("token", response.jwtToken);
     }
@@ -103,6 +107,7 @@ const Login: FC = () => {
           </LoginSubmit>
         </LoginForm>
       </CardContent>
+      <PopupMessage error={error} onCLose={() => setError(null)} />
     </LoginCard>
   );
 };
