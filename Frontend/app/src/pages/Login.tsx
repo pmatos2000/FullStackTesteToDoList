@@ -47,7 +47,7 @@ const Login: FC = () => {
 
   const login = async () => {
     setLoggingIn(true);
-    const response = await AuthService.Login(nameUser, password);
+    const response = await AuthService.login(nameUser, password);
     if (response instanceof Error) {
       console.log(response.message);
       setError(response.message);

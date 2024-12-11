@@ -8,6 +8,10 @@ import {
   Card,
 } from "@mui/material";
 import LayoutPageCenter from "../components/LayoutPageCenter";
+import AuthService from "../services/AuthService";
+import PopupMessage from "../components/PopupMessage";
+import { PathRoter } from "../routes/Router";
+import { useNavigate } from "react-router-dom";
 
 const FormContainer = styled(Box)({
   display: "flex",
@@ -36,6 +40,10 @@ const ValidationBox = styled(Box)(({ theme }) => ({
 const Register: React.FC = () => {
   const [userName, setUserName] = useState<string>("");
   const [password, setPassword] = useState<string>("");
+  const [registering, setRegistering] = useState<boolean>(false);
+  const [error, setError] = useState<string | null>(null);
+
+  const navigate = useNavigate();
 
   const passwordMinLength = password.length >= 8;
   const passwordMaxLength = password.length <= 16;
@@ -52,8 +60,23 @@ const Register: React.FC = () => {
     passwordHasNumber &&
     passwordSpecialChar;
 
-  const handleSubmit = (event: React.FormEvent) => {
+  const register = async () => {
+    setRegistering(true);
+    const response = await AuthService.register(userName, password);
+    if (response instanceof Error) {
+      console.log(response.message);
+      setError(response.message);
+    } else {
+      navigate(PathRoter.LOGIN);
+    }
+    setRegistering(false);
+  };
+
+  const handleSubmit = async (event: React.FormEvent) => {
     event.preventDefault();
+    setRegistering(true);
+    register();
+    setRegistering(false);
   };
 
   return (
@@ -88,7 +111,7 @@ const Register: React.FC = () => {
                   variant="contained"
                   color="primary"
                   fullWidth
-                  disabled={!passwordValid}
+                  disabled={!passwordValid || registering}
                 >
                   Registrar
                 </Button>
@@ -118,6 +141,7 @@ const Register: React.FC = () => {
           </ValidationBox>
         </FormContainer>
       </Card>
+      <PopupMessage error={error} onCLose={() => setError(null)} />
     </LayoutPageCenter>
   );
 };

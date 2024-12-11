@@ -1,8 +1,12 @@
 import AuthRepositorie from "../repositories/AuthRepositorie";
 
 class AuthService {
-  async Login(userName: string, password: string) {
-    return AuthRepositorie.Login(userName, password);
+  async login(userName: string, password: string) {
+    return AuthRepositorie.login(userName, password);
+  }
+
+  async register(userName: string, password: string) {
+    return await AuthRepositorie.register(userName, password);
   }
 }
 

@@ -49,7 +49,7 @@ namespace ToDo.API.Controllers
 
             if (result)
             {
-                return Ok(new
+                return Ok(new 
                 {
                     Message = Messages.SUCCESS_NEW_USER
                 });

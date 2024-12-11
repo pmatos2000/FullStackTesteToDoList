@@ -38,6 +38,9 @@ axiosInstance.interceptors.response.use(
           return Promise.reject(new Error(error.response?.data?.message));
         return Promise.reject(new Error(Mensages.ERROR_UNAUTHORIZED));
       }
+      if (error.response?.status === StatusCodes.CONFLICT) {
+        return Promise.reject(new Error(error.response?.data?.message));
+      }
       if (error.response?.status === StatusCodes.NOT_FOUND) {
         Promise.reject(new Error(Mensages.ERROR_NOT_FOUND));
       }
