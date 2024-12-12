@@ -26,7 +26,9 @@ namespace ToDo.API.Controllers
         /// <response code="400">Se a validação falhar.</response>
         /// <response code="500">Erro interno do servidor.</response>
         [HttpGet("verify-username")]
-        [ProducesResponseType(typeof(bool), 200)]
+        [ProducesResponseType(typeof(bool), StatusCodes.Status200OK)]
+        [ProducesResponseType(typeof(ValidationProblemDetails), StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
         public async Task<IActionResult> VerifyUserNameAsync([FromQuery] UserNameModel model)
         {
             var result = await userService.VerifyUserNameAsync(model.UserName);
@@ -43,22 +45,20 @@ namespace ToDo.API.Controllers
         /// <response code="409">Usuário já existe.</response>
         /// <response code="500">Erro interno do servidor.</response>
         [HttpPost("register")]
+        [ProducesResponseType(typeof(MessageResponseModel), StatusCodes.Status200OK)]
+        [ProducesResponseType(typeof(ValidationProblemDetails), StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(typeof(MessageResponseModel), StatusCodes.Status409Conflict)]
+        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
         public async Task<IActionResult> RegisterAsync([FromBody] UserRegisterModel user)
         {
             var result = await userService.RegisterAsync(user.UserName, user.Password);
 
             if (result)
             {
-                return Ok(new 
-                {
-                    Message = Messages.SUCCESS_NEW_USER
-                });
+                return Ok(new MessageResponseModel(Messages.SUCCESS_NEW_USER));
             }
 
-            return Conflict(new
-            {
-                Message = Messages.ERRO_USER_CONFLICT
-            });
+            return Conflict(new MessageResponseModel(Messages.ERRO_USER_CONFLICT));
         }
 
         /// <summary>
@@ -71,10 +71,10 @@ namespace ToDo.API.Controllers
         /// <response code="401">Erros de validação ou credenciais incorretas.</response>
         /// <response code="500">Erro interno do servidor.</response>
         [HttpPost("login")]
-        [ProducesResponseType(typeof(LoginResponseModel), 200)]
-        [ProducesResponseType(400)]
-        [ProducesResponseType(401)]
-        [ProducesResponseType(500)]
+        [ProducesResponseType(typeof(LoginResponseModel), StatusCodes.Status200OK)]
+        [ProducesResponseType(typeof(ValidationProblemDetails), StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(typeof(MessageResponseModel), StatusCodes.Status401Unauthorized)]
+        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
         public async Task<IActionResult> LoginAsync([FromBody] LoginUserModel loginModel)
         {
             var loginResult = await userService.LoginAsync(loginModel.UserName, loginModel.Password);
@@ -88,10 +88,7 @@ namespace ToDo.API.Controllers
                 });
             }
 
-            return Unauthorized(new
-            {
-                Message = loginResult.ErrorMessage,
-            });
+            return Unauthorized(new MessageResponseModel(loginResult.ErrorMessage));
         }
 
     }
