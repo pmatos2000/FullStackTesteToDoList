@@ -46,6 +46,11 @@ namespace ToDo.Repositories.Map
 
             builder.Property(x => x.CategoryId)
                 .HasColumnName(nameof(TodoItem.CategoryId).ConvertPascalToSnake());
+
+            builder.HasOne(t => t.Category)
+                .WithMany(c => c.Tasks)
+                .HasForeignKey(t => t.CategoryId)
+                .OnDelete(DeleteBehavior.SetNull);
         }
     }
 }
