@@ -41,6 +41,7 @@ namespace ToDo.Repositories.Repositories
         {
             var listCategory = await appDbContext.Categories
                 .Where(x => x.UserId == userId)
+                .OrderBy(x => x.Name)
                 .ToListAsync();
 
             return listCategory;

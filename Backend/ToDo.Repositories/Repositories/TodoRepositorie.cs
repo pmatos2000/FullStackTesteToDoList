@@ -42,7 +42,7 @@ namespace ToDo.Repositories.Repositories
                 query = query.Where(query => query.CategoryId == categoryId.Value);
             }
 
-            var list = await query.ToListAsync();
+            var list = await query.OrderBy(x => x.Id).ToListAsync();
 
             return list;
         }
