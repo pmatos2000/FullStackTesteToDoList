@@ -44,8 +44,11 @@ const ListCategory: FC = () => {
   const [listCategory, setListCategory] = useState<Category[]>([]);
   const [newCategoryName, setNewCategoryName] = useState("");
 
-  const handleDelete = (id: number) => {
-    setListCategory((list) => list.filter((x) => x.id !== id));
+  const handleDelete = async (id: number) => {
+    const sucess = await CategoryService.deleteCategory(id);
+    if (sucess) {
+      setListCategory((list) => list.filter((x) => x.id !== id));
+    }
   };
 
   const handleAdd = () => {};
