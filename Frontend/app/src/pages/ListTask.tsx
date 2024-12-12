@@ -87,7 +87,11 @@ const ListTask: FC = () => {
         <Box display="flex" justifyContent="space-between">
           <Typography variant="h4">Gerenciador de Tarefas</Typography>
           <Box display="flex" gap="24px">
-            <Button variant="contained" color="primary">
+            <Button
+              variant="contained"
+              color="primary"
+              onClick={() => navigate(PathRoter.CATEGORYS)}
+            >
               Criar categoria
             </Button>
             <Button

@@ -6,6 +6,7 @@ import ContainerPage from "./ContainerPage";
 import NewTask from "../pages/NewTask";
 import EditTask from "../pages/EditTask";
 import Register from "../pages/Register";
+import ListCategory from "../pages/ListCategory";
 
 export const PathRoter = {
   LOGIN: "/",
@@ -13,6 +14,7 @@ export const PathRoter = {
   NEW_TASK: "/new/task",
   EDIT_TASK: "/edit/task",
   REGISTER_USER: "/register",
+  CATEGORYS: "/categorys",
 };
 
 const router = createBrowserRouter([
@@ -53,6 +55,14 @@ const router = createBrowserRouter([
     element: (
       <ContainerPage>
         <Register />
+      </ContainerPage>
+    ),
+  },
+  {
+    path: PathRoter.CATEGORYS,
+    element: (
+      <ContainerPage>
+        <ListCategory />
       </ContainerPage>
     ),
   },
