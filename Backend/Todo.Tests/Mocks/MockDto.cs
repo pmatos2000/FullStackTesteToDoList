@@ -1,5 +1,4 @@
-﻿using ToDo.Repositories.Entitys;
-using ToDo.Services.Dto;
+﻿using ToDo.Services.Dto;
 
 namespace Todo.Tests.Mocks
 {

@@ -1,7 +1,6 @@
 ﻿using ToDo.Repositories.Entitys;
 using ToDo.Repositories.Entitys.Models;
 using ToDo.Repositories.Model;
-using ToDo.Services.Dto;
 
 namespace Todo.Tests.Mocks
 {

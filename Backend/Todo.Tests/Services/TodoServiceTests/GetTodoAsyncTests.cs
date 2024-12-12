@@ -1,9 +1,4 @@
 ﻿using Moq;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Todo.Tests.Mocks;
 using ToDo.Repositories.Interfaces;
 using ToDo.Repositories.Model;
@@ -39,7 +34,7 @@ namespace Todo.Tests.Services.TodoServiceTests
             Assert.That(result, Is.Null);
 
             mockTodoRepositorie
-                .Verify(m =>  m.GetTodoAsync(userId, taskId), Times.Once());
+                .Verify(m => m.GetTodoAsync(userId, taskId), Times.Once());
 
             mockTodoRepositorie
                 .VerifyNoOtherCalls();

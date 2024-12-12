@@ -2,7 +2,6 @@
 using Todo.Tests.Mocks;
 using ToDo.Repositories.Interfaces;
 using ToDo.Repositories.Model;
-using ToDo.Services.Interfaces;
 using ToDo.Services.Services;
 
 namespace Todo.Tests.Services.TodoServiceTests

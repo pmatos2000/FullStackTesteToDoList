@@ -1,12 +1,7 @@
 ﻿using Moq;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using Todo.Tests.Mocks;
 using ToDo.Repositories.Interfaces;
 using ToDo.Services.Services;
-using Todo.Tests.Mocks;
 
 namespace Todo.Tests.Services.TodoServiceTests
 {
