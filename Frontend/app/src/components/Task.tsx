@@ -38,9 +38,9 @@ const Task: FC<TaskProps> = ({ todo, setTodo, onSubmit, listCategory }) => {
       <CardContent>
         <form onSubmit={handleSubmit}>
           <Box gap="16px" padding="16px">
-            {todo.createAt && todo.updatedAt && (
+            {todo.createdAt && todo.updatedAt && (
               <Box display="flex" gap="16px" justifyContent="space-between">
-                <Typography variant="h6">{`Data criação: ${todo.createAt.format(
+                <Typography variant="h6">{`Data criação: ${todo.createdAt.format(
                   MASK_DATE
                 )}`}</Typography>
                 <Typography variant="h6">{`Data edição: ${todo.updatedAt.format(

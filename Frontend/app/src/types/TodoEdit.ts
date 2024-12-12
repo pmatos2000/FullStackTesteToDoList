@@ -1,9 +1,9 @@
 import { Moment } from "moment";
 import TodoItem from "./TodoItem";
 
-type TodoEdit = Omit<TodoItem, "id" | "createAt" | "updatedAt"> & {
+type TodoEdit = Omit<TodoItem, "id" | "createdAt" | "updatedAt"> & {
   id?: number;
-  createAt?: Moment;
+  createdAt?: Moment;
   updatedAt?: Moment;
 };
 
