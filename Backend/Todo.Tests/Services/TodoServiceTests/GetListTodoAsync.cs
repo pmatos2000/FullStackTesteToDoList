@@ -35,6 +35,11 @@ namespace Todo.Tests.Services.TodoServiceTests
             var result = await todoService.GetListTodoAsync(userId, null);
 
             Assert.That(result, Is.EqualTo(MockDto.ListTodoItem));
+
+            mockTodoRepositorie
+                .Verify(m => m.GetListTodoAsync(userId, null), Times.Once());
+
+            mockTodoRepositorie.VerifyNoOtherCalls();
         }
     }
 }
