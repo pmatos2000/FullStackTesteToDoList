@@ -14,5 +14,13 @@ namespace Todo.Tests.Mocks
             Id = Constants.CATEGORY_ID_UM,
             Name = Constants.CATEGORY_NAME_ONE
         };
+
+        public static CategoryDto CategoryTwo = new CategoryDto
+        {
+            Id = Constants.CATEGORY_ID_TWO,
+            Name = Constants.CATEGORY_NAME_TWO
+        };
+
+        public static IEnumerable<CategoryDto> ListCategoryOne { get; } = [CategoryOne, CategoryTwo];
     }
 }

@@ -8,6 +8,8 @@
 
         public const long CATEGORY_ID_UM = 201;
         public const string CATEGORY_NAME_ONE = "CATEGORY_NAME_UM";
-        
+        public const long CATEGORY_ID_TWO = 202;
+        public const string CATEGORY_NAME_TWO = "CATEGORY_NAME_TWO";
+
     }
 }
