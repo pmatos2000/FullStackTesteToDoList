@@ -16,6 +16,9 @@
         public const string TASK_DESCRIPTION_ONE = "TASK_DESCRIPTION_ONE";
         public const bool TASK_IS_COMPLETED_ONE = true;
 
+        public const long TASK_ID_TWO = 302;
+        public const long TASK_ID_THREE = 303;
+
         public static DateTime DATE_CREATED_AT_ONE = DateTime.Now.AddHours(-1);
         public static DateTime DATE_UPDATED_AT_ONE = DateTime.Now;
 

@@ -30,7 +30,7 @@ namespace Todo.Tests.Mocks
 
         public static TodoItemDto TodoItemTwo { get; } = new TodoItemDto
         {
-            Id = MockConstants.USER_ID_ONE,
+            Id = MockConstants.TASK_ID_TWO,
             Title = "Title",
             Description = "Description",
             IsCompleted = false,
@@ -38,5 +38,18 @@ namespace Todo.Tests.Mocks
             CreatedAt = MockConstants.DATE_CREATED_AT_ONE,
             UpdatedAt = MockConstants.DATE_UPDATED_AT_ONE
         };
+
+        public static TodoItemDto TodoItemThree { get; } = new TodoItemDto
+        {
+            Id = MockConstants.TASK_ID_THREE,
+            Title = "Title",
+            Description = "Description",
+            IsCompleted = false,
+            CategoryId = null,
+            CreatedAt = MockConstants.DATE_CREATED_AT_ONE,
+            UpdatedAt = MockConstants.DATE_UPDATED_AT_ONE
+        };
+
+        public static IEnumerable<TodoItemDto> ListTodoItem { get; } = [TodoItemTwo, TodoItemThree];
     }
 }

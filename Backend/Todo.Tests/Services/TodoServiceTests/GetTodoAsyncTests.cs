@@ -28,7 +28,7 @@ namespace Todo.Tests.Services.TodoServiceTests
         public async Task NotFound()
         {
             var userId = MockConstants.USER_ID_ONE;
-            var taskId = MockConstants.TASK_ID_ONE;
+            var taskId = MockConstants.TASK_ID_TWO;
 
             mockTodoRepositorie
                 .Setup(m => m.GetTodoAsync(It.IsAny<long>(), It.IsAny<long>()))
@@ -50,7 +50,7 @@ namespace Todo.Tests.Services.TodoServiceTests
         public async Task GetSucess()
         {
             var userId = MockConstants.USER_ID_ONE;
-            var taskId = MockConstants.TASK_ID_ONE;
+            var taskId = MockConstants.TASK_ID_TWO;
 
             mockTodoRepositorie
                 .Setup(m => m.GetTodoAsync(It.IsAny<long>(), It.IsAny<long>()))
@@ -67,8 +67,6 @@ namespace Todo.Tests.Services.TodoServiceTests
                 .VerifyNoOtherCalls();
 
         }
-
-
 
     }
 }
