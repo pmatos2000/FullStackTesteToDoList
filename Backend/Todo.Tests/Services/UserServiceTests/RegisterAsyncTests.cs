@@ -27,7 +27,7 @@ namespace Todo.Tests.Services.UserServiceTests
         [Test]
         public async Task UserNameExists()
         {
-            var userName = Entity.MockUser.UserName;
+            var userName = MockEntity.MockUser.UserName;
             var password = Constants.PASSWORD;
 
             mockUserRepositorie
@@ -47,7 +47,7 @@ namespace Todo.Tests.Services.UserServiceTests
         [Test]
         public async Task RegisterSucess()
         {
-            var userName = Entity.MockUser.UserName;
+            var userName = MockEntity.MockUser.UserName;
             var password = Constants.PASSWORD;
 
             mockUserRepositorie

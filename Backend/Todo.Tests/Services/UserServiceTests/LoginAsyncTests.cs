@@ -26,7 +26,7 @@ namespace Todo.Tests.Services.UserServiceTests
         [Test]
         public async Task UserNotFound()
         {
-            var userName = Entity.MockUser.UserName;
+            var userName = MockEntity.MockUser.UserName;
             var password = Constants.PASSWORD;
 
             mockUserRepositorie
@@ -47,12 +47,12 @@ namespace Todo.Tests.Services.UserServiceTests
         [Test]
         public async Task PasswordError()
         {
-            var userName = Entity.MockUserLogin.UserName;
+            var userName = MockEntity.MockUserLogin.UserName;
             var password = "123456";
 
             mockUserRepositorie
                 .Setup(m => m.GetUserLoginByNameAsync(It.IsAny<string>()))
-                .ReturnsAsync(Entity.MockUserLogin);
+                .ReturnsAsync(MockEntity.MockUserLogin);
 
             var result = await userService.LoginAsync(userName, password);
 
@@ -68,19 +68,19 @@ namespace Todo.Tests.Services.UserServiceTests
         [Test]
         public async Task LoginSucess()
         {
-            var userName = Entity.MockUserLogin.UserName;
+            var userName = MockEntity.MockUserLogin.UserName;
             var password = Constants.PASSWORD;
 
             mockUserRepositorie
                 .Setup(m => m.GetUserLoginByNameAsync(It.IsAny<string>()))
-                .ReturnsAsync(Entity.MockUserLogin);
+                .ReturnsAsync(MockEntity.MockUserLogin);
 
             var result = await userService.LoginAsync(userName, password);
 
             Assert.That(result.Success, Is.True);
             Assert.That(result.ErrorMessage, Is.EqualTo(String.Empty));
             Assert.That(result.UserName, Is.EqualTo(userName));
-            Assert.That(result.UserId, Is.EqualTo(Entity.MockUserLogin.Id));
+            Assert.That(result.UserId, Is.EqualTo(MockEntity.MockUserLogin.Id));
 
             mockUserRepositorie
                 .Verify(m => m.GetUserLoginByNameAsync(userName), Times.Once());
