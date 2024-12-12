@@ -1,6 +1,7 @@
 ﻿using ToDo.Repositories.Entitys;
 using ToDo.Repositories.Entitys.Models;
 using ToDo.Repositories.Model;
+using ToDo.Services.Dto;
 
 namespace Todo.Tests.Mocks
 {
@@ -52,5 +53,18 @@ namespace Todo.Tests.Mocks
                 && a.IsCompleted == b.IsCompleted
                 && a.CategoryId == b.CategoryId;
         }
+
+
+        public static TodoItem TodoItemTwo { get; } = new TodoItem
+        {
+            Id = MockConstants.USER_ID_ONE,
+            Title = "Title",
+            Description = "Description",
+            IsCompleted = false,
+            CategoryId = MockConstants.CATEGORY_ID_TWO,
+            CreatedAt = MockConstants.DATE_CREATED_AT_ONE,
+            UpdatedAt = MockConstants.DATE_UPDATED_AT_ONE,
+            UserId = MockConstants.USER_ID_ONE,
+        };
     }
 }

@@ -27,5 +27,16 @@ namespace Todo.Tests.Mocks
             IsCompleted = MockConstants.TASK_IS_COMPLETED_ONE,
             CategoryId = MockConstants.CATEGORY_ID_ONE,
         };
+
+        public static TodoItemDto TodoItemTwo { get; } = new TodoItemDto
+        {
+            Id = MockConstants.USER_ID_ONE,
+            Title = "Title",
+            Description = "Description",
+            IsCompleted = false,
+            CategoryId = MockConstants.CATEGORY_ID_TWO,
+            CreatedAt = MockConstants.DATE_CREATED_AT_ONE,
+            UpdatedAt = MockConstants.DATE_UPDATED_AT_ONE
+        };
     }
 }
