@@ -27,15 +27,15 @@ const FormBox = styled(Box)({
   padding: "16px",
 });
 
-const ValidationBox = styled(Box)(({ theme }) => ({
+const ValidationBox = styled(Box)({
   display: "flex",
   flexDirection: "column",
   gap: "8px",
   padding: "16px",
-  backgroundColor: theme.palette.primary.dark,
+  backgroundColor: "#00c0ff",
   width: "-webkit-fill-available",
   "@-moz-document url-prefix()": { width: "-moz-available" },
-}));
+});
 
 const Register: React.FC = () => {
   const [userName, setUserName] = useState<string>("");
