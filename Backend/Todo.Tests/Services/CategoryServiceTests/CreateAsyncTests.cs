@@ -22,8 +22,8 @@ namespace Todo.Tests.Services.CategoryServiceTests
         [Test]
         public async Task Conflict()
         {
-            var userId = Constants.USER_ID_ONE;
-            var categoryName = Constants.CATEGORY_NAME_ONE;
+            var userId = MockConstants.USER_ID_ONE;
+            var categoryName = MockConstants.CATEGORY_NAME_ONE;
 
             mockCategoryRepositorie
                 .Setup(m => m.VerifyCategoryNameAsync(It.IsAny<long>(), It.IsAny<string>()))
@@ -34,7 +34,7 @@ namespace Todo.Tests.Services.CategoryServiceTests
             Assert.That(result, Is.Null);
 
             mockCategoryRepositorie
-                .Verify(m => m.VerifyCategoryNameAsync(Constants.USER_ID_ONE, Constants.CATEGORY_NAME_ONE), Times.Once);
+                .Verify(m => m.VerifyCategoryNameAsync(MockConstants.USER_ID_ONE, MockConstants.CATEGORY_NAME_ONE), Times.Once);
 
             mockCategoryRepositorie
                 .VerifyNoOtherCalls();
@@ -43,8 +43,8 @@ namespace Todo.Tests.Services.CategoryServiceTests
         [Test]
         public async Task CreateSucess()
         {
-            var userId = Constants.USER_ID_ONE;
-            var categoryName = Constants.CATEGORY_NAME_ONE;
+            var userId = MockConstants.USER_ID_ONE;
+            var categoryName = MockConstants.CATEGORY_NAME_ONE;
 
             mockCategoryRepositorie
                 .Setup(m => m.VerifyCategoryNameAsync(It.IsAny<long>(), It.IsAny<string>()))
@@ -59,10 +59,10 @@ namespace Todo.Tests.Services.CategoryServiceTests
             Assert.That(result, Is.EqualTo(MockDto.CategoryOne));
 
             mockCategoryRepositorie
-                .Verify(m => m.VerifyCategoryNameAsync(Constants.USER_ID_ONE, Constants.CATEGORY_NAME_ONE), Times.Once);
+                .Verify(m => m.VerifyCategoryNameAsync(MockConstants.USER_ID_ONE, MockConstants.CATEGORY_NAME_ONE), Times.Once);
 
             mockCategoryRepositorie
-                .Verify(m => m.CreateCategoryAsync(Constants.USER_ID_ONE, Constants.CATEGORY_NAME_ONE), Times.Once);
+                .Verify(m => m.CreateCategoryAsync(MockConstants.USER_ID_ONE, MockConstants.CATEGORY_NAME_ONE), Times.Once);
 
             mockCategoryRepositorie
                 .VerifyNoOtherCalls();

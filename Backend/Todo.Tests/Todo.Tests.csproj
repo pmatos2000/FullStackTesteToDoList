@@ -28,8 +28,4 @@
     <ProjectReference Include="..\ToDo.Shared\ToDo.Shared.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Services\TodoServiceTests\" />
-  </ItemGroup>
-
 </Project>

@@ -25,7 +25,7 @@ namespace Todo.Tests.Services.UserServiceTests
         public async Task UserNotFound()
         {
             var userName = MockEntity.MockUser.UserName;
-            var password = Constants.PASSWORD;
+            var password = MockConstants.PASSWORD;
 
             mockUserRepositorie
                 .Setup(m => m.GetUserLoginByNameAsync(It.IsAny<string>()))
@@ -67,7 +67,7 @@ namespace Todo.Tests.Services.UserServiceTests
         public async Task LoginSucess()
         {
             var userName = MockEntity.MockUserLogin.UserName;
-            var password = Constants.PASSWORD;
+            var password = MockConstants.PASSWORD;
 
             mockUserRepositorie
                 .Setup(m => m.GetUserLoginByNameAsync(It.IsAny<string>()))

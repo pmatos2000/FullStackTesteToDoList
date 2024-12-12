@@ -21,7 +21,7 @@ namespace Todo.Tests.Services.CategoryServiceTests
         [Test]
         public async Task GetListSucess()
         {
-            var userId = Constants.USER_ID_ONE;
+            var userId = MockConstants.USER_ID_ONE;
 
             mockCategoryRepositorie
                 .Setup(m => m.GetListCategoryAsync(It.IsAny<long>()))
@@ -32,7 +32,7 @@ namespace Todo.Tests.Services.CategoryServiceTests
             Assert.That(result, Is.EqualTo(MockDto.ListCategoryOne));
 
             mockCategoryRepositorie
-                .Verify(m => m.GetListCategoryAsync(Constants.USER_ID_ONE), Times.Once);
+                .Verify(m => m.GetListCategoryAsync(MockConstants.USER_ID_ONE), Times.Once);
 
             mockCategoryRepositorie
                 .VerifyNoOtherCalls();
