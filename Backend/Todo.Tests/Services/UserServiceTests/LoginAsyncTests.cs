@@ -1,12 +1,10 @@
 ﻿using Moq;
-using NUnit.Framework;
+using Todo.Tests.Mocks;
+using ToDo.Repositories.Entitys.Models;
 using ToDo.Repositories.Interfaces;
 using ToDo.Services.Interfaces;
 using ToDo.Services.Services;
-using Todo.Tests.Mocks;
-using ToDo.Repositories.Entitys.Models;
 using ToDo.Shared.Constants;
-using NUnit.Framework.Legacy;
 
 namespace Todo.Tests.Services.UserServiceTests
 {

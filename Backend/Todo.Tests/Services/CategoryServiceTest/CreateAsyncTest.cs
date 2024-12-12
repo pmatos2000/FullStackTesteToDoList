@@ -1,8 +1,7 @@
 ﻿using Moq;
+using Todo.Tests.Mocks;
 using ToDo.Repositories.Interfaces;
 using ToDo.Services.Services;
-using Todo.Tests.Mocks;
-using ToDo.Services.Dto;
 
 namespace Todo.Tests.Services.CategoryServiceTest
 {
