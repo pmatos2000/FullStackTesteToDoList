@@ -82,7 +82,6 @@ namespace Todo.Tests.Services.UserServiceTests
             Assert.That(result.UserName, Is.EqualTo(userName));
             Assert.That(result.UserId, Is.EqualTo(Entity.MockUserLogin.Id));
 
-
             mockUserRepositorie
                 .Verify(m => m.GetUserLoginByNameAsync(userName), Times.Once());
 
