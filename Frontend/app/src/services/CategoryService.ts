@@ -19,6 +19,14 @@ class CategoryService {
     }
     return true;
   }
+
+  async createCategory(categoryName: string): Promise<Category | null> {
+    const response = await CategoryRepositorie.createCategory(categoryName);
+    if (response instanceof Error) {
+      return null;
+    }
+    return response;
+  }
 }
 
 export default new CategoryService();

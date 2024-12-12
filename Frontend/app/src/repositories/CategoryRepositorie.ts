@@ -1,6 +1,5 @@
-import { error } from "console";
 import axiosInstance from "../config/axiosConfig";
-import { CategoryResponse } from "../types";
+import { CategoryCreateRequest, CategoryResponse } from "../types";
 import MessageResponse from "../types/MessageResponse";
 
 class CategoryRepositorie {
@@ -16,6 +15,17 @@ class CategoryRepositorie {
 
     return axiosInstance
       .delete<MessageResponse>(url)
+      .then((res) => res.data)
+      .catch((error: Error) => error);
+  }
+
+  createCategory(categoryName: string) {
+    const req: CategoryCreateRequest = {
+      categoryName,
+    };
+
+    return axiosInstance
+      .post<CategoryResponse>("/category/create", req)
       .then((res) => res.data)
       .catch((error: Error) => error);
   }

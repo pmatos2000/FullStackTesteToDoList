@@ -42,7 +42,9 @@ const StyledTableRow = styled(TableRow)(({ theme }) => ({
 
 const ListCategory: FC = () => {
   const [listCategory, setListCategory] = useState<Category[]>([]);
-  const [newCategoryName, setNewCategoryName] = useState("");
+  const [categoryName, setCategoryName] = useState<string>("");
+  const [executingCategoryCreation, setExecutingCategoryCreation] =
+    useState<boolean>(false);
 
   const handleDelete = async (id: number) => {
     const sucess = await CategoryService.deleteCategory(id);
@@ -51,7 +53,15 @@ const ListCategory: FC = () => {
     }
   };
 
-  const handleAdd = () => {};
+  const handleAdd = async () => {
+    setExecutingCategoryCreation(true);
+    const newCategory = await CategoryService.createCategory(categoryName);
+    if (newCategory) {
+      setListCategory([...listCategory, newCategory]);
+      setCategoryName("");
+    }
+    setExecutingCategoryCreation(false);
+  };
 
   const executeFetchCategoryList = async () => {
     const newListCategory = await CategoryService.getListCategory();
@@ -97,8 +107,8 @@ const ListCategory: FC = () => {
             label="Nova Categoria"
             variant="outlined"
             fullWidth
-            value={newCategoryName}
-            onChange={(e) => setNewCategoryName(e.target.value)}
+            value={categoryName}
+            onChange={(e) => setCategoryName(e.target.value.trimStart())}
             margin="normal"
           />
         </Grid2>
@@ -108,6 +118,7 @@ const ListCategory: FC = () => {
             variant="contained"
             color="primary"
             onClick={handleAdd}
+            disabled={categoryName.length === 0 || executingCategoryCreation}
           >
             Adicionar
           </Button>
