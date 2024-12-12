@@ -21,8 +21,8 @@ class TaskService {
     };
   }
 
-  async getListTodo(): Promise<TodoItem[]> {
-    const response = await TaskRepositorie.getListTodo();
+  async getListTodo(categoryId: number | null): Promise<TodoItem[]> {
+    const response = await TaskRepositorie.getListTodo(categoryId);
     if (response instanceof Error) {
       console.log(response.message);
       return [];

@@ -8,8 +8,13 @@ import {
 import MessageResponse from "../types/MessageResponse";
 
 class TaskRepositorie {
-  getListTodo() {
-    const url = "task/list";
+  getListTodo(categoryId: number | null) {
+    let url = "task/list";
+    if (categoryId) {
+      const query = new URLSearchParams();
+      query.append("categoryId", categoryId.toString());
+      url = `${url}?${query.toString()}`;
+    }
     return axiosInstance
       .get<TodoItemResponse[]>(url)
       .then((res) => res.data)

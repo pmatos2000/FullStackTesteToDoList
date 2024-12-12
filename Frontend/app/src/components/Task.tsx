@@ -81,13 +81,16 @@ const Task: FC<TaskProps> = ({ todo, setTodo, onSubmit, listCategory }) => {
                 labelId="select-category-label"
                 value={todo.categoryId}
                 label="Categoria"
-                onChange={(e) =>
+                onChange={(e) => {
+                  let newCategoryId = e.target.value as number | null;
+                  if (newCategoryId === -1) newCategoryId = null;
                   setTodo({
                     ...todo,
                     categoryId: e.target.value as number | null,
-                  })
-                }
+                  });
+                }}
               >
+                <MenuItem value={-1}>Limpar seleção</MenuItem>
                 {listCategory.map((category) => (
                   <MenuItem key={category.id} value={category.id}>
                     {category.name}
