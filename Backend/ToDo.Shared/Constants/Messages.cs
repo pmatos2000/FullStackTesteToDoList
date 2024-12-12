@@ -29,6 +29,8 @@
         public const string SUCESS_TODO_UPDATE = "Tarefa atualizada.";
         public const string SUCESS_TODO_UPDATE_STATUS = "Status de conclusão da tarefa atualizado.";
         public const string SUCESS_TODO_DELETE = "Tarafa deletada.";
+        
+        public const string SUCESS_CATEGORY_DELETE = "Categoria deletada.";
     }
 }
 

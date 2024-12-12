@@ -40,5 +40,10 @@ namespace ToDo.Services.Services
                 Name = category.Name,
             };
         }
+
+        public Task<long?> DeleteCategoryAsync(long userId, long categoryId)
+        {
+            return categoryRepositorie.DeleteCategoryAsync(userId, categoryId);
+        }
     }
 }

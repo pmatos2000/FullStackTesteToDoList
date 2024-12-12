@@ -6,5 +6,6 @@ namespace ToDo.Services.Interfaces
     {
         public Task<CategoryDto?> CreateAsync(long userId, string categoryName);
         public Task<IEnumerable<CategoryDto>> GetListCategoryAsync(long userId);
+        public Task<long?> DeleteCategoryAsync(long userId, long categoryId);
     }
 }

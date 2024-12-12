@@ -50,7 +50,6 @@ namespace ToDo.API.Controllers
         /// <summary>
         /// Atualiza uma tarefa existente para o usuário logado.
         /// </summary>
-        /// <param name="id">O id da tarefa a ser atualizada.</param>
         /// <param name="model">Modelo contendo os dados atualizados da tarefa.</param>
         /// <returns>Retorna um status indicando o resultado da operação.</returns>
         /// <response code="200">Retorna se a tarefa foi atualizada com sucesso.</response>

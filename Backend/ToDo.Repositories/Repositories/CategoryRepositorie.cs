@@ -23,6 +23,20 @@ namespace ToDo.Repositories.Repositories
             return newCategoy.Entity;
         }
 
+        public async Task<long?> DeleteCategoryAsync(long userId, long categoryId)
+        {
+            var category = await appDbContext.Categories
+               .FirstOrDefaultAsync(t => t.Id == categoryId && t.UserId == userId);
+
+            if (category == null) return null;
+
+            appDbContext.Categories.Remove(category);
+
+            await appDbContext.SaveChangesAsync();
+
+            return category.Id;
+        }
+
         public async Task<IEnumerable<Category>> GetListCategoryAsync(long userId)
         {
             var listCategory = await appDbContext.Categories

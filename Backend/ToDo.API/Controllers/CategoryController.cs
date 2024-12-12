@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using ToDo.API.Models;
 using ToDo.Services.Dto;
 using ToDo.Services.Interfaces;
+using ToDo.Services.Services;
 using ToDo.Shared.Constants;
 
 namespace ToDo.API.Controllers
@@ -80,6 +81,32 @@ namespace ToDo.API.Controllers
                 Id = dto.Id,
                 Name = dto.Name,
             };
+        }
+
+        /// <summary>
+        /// Exclui uma categoria existente para o usuário logado pelo ID fornecido.
+        /// </summary>
+        /// <param name="id">O ID da categoria a ser excluída.</param>
+        /// <returns>Retorna um status indicando o resultado da operação.</returns>
+        /// <response code="200">A categoria foi excluída com sucesso.</response>
+        /// <response code="401">As credenciais estão incorretas ou o usuário não está autenticado.</response>
+        /// <response code="404">A categoria não foi encontrada.</response>
+        /// <response code="500">Ocorreu um erro interno no servidor.</response>
+        [HttpDelete("{id}")]
+        [ProducesResponseType(typeof(MessageResponseModel), StatusCodes.Status200OK)]
+        [ProducesResponseType(typeof(MessageResponseModel), StatusCodes.Status401Unauthorized)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
+        public async Task<IActionResult> DeleteCategoryAsync(long id)
+        {
+            var userId = GetUsetIdFromJwtToken();
+            if (userId == null) return Unauthorized(new MessageResponseModel(Messages.ERRO_INVALID_CREDENTIALS));
+
+            var result = await categoryService.DeleteCategoryAsync(userId.Value, id);
+
+            if (result == null) return NotFound();
+
+            return Ok(new MessageResponseModel(Messages.SUCESS_CATEGORY_DELETE));
         }
 
     }
