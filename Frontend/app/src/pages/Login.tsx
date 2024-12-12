@@ -34,7 +34,7 @@ const LoginForm = styled("form")({
   marginTop: "8px",
 });
 
-const LoginSubmit = styled(Button)({
+const StyledButton = styled(Button)({
   margin: "24px 0 16px",
 });
 
@@ -101,7 +101,7 @@ const Login: FC = () => {
               value={password}
               onChange={(e) => setPassword(e.target.value)}
             />
-            <LoginSubmit
+            <StyledButton
               type="submit"
               fullWidth
               variant="contained"
@@ -110,7 +110,14 @@ const Login: FC = () => {
               disabled={nameUser.length < 3 || password.length < 8 || loggingIn}
             >
               Entrar
-            </LoginSubmit>
+            </StyledButton>
+            <Button
+              fullWidth
+              variant="outlined"
+              onClick={() => navigate(PathRoter.REGISTER_USER)}
+            >
+              Registrar
+            </Button>
           </LoginForm>
         </CardContent>
         <PopupMessage error={error} onCLose={() => setError(null)} />
