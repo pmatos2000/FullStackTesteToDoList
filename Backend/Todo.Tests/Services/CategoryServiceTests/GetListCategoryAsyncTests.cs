@@ -3,7 +3,7 @@ using Todo.Tests.Mocks;
 using ToDo.Repositories.Interfaces;
 using ToDo.Services.Services;
 
-namespace Todo.Tests.Services.CategoryServiceTest
+namespace Todo.Tests.Services.CategoryServiceTests
 {
     public class GetListCategoryAsyncTests
     {
